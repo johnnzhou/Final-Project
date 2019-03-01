@@ -1,5 +1,6 @@
 # Final Project Proposal
 
+![](https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png)
 
 ### Project Description
 - Our group will use the statistics of enrollment of each major in universities. Institute of Education Sciences gathered these statistics through surveys across
