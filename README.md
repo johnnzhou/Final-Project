@@ -6,6 +6,8 @@ My group will use the dataset about education in America starting from prekinder
 United States. The website of National Center for Education Statistics allowed me to gain access 
 for the data. Lastly, this database includes education information from 1995 to current year.
 
+Our  target audience are minorities who feel discriminated due to their race or gender. They believe that there is still inequality in the work place.  With the data  that our team analyzes, this can prove to our audience that there still is a discrimination in the workplace due to race or gender. 
+
 
 ### Technical Analysis
 > This section of your proposal is an opportunity to think through the specific analytical steps you'll need to complete throughout the project.
