@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Final-Project Proposal
 
 
