@@ -1,7 +1,14 @@
-# Final Project Proposal
+# Final-Project Proposal
 
 
 ### Project Description
+My group will use the dataset about education in America starting from prekindergarten through graduate school. Institute of Education Sciences gathered these statistics through surveys across 
+United States. The website of National Center for Education Statistics allowed me to gain access 
+for the data. Lastly, this database includes education information from 1995 to current year.
+
+Our  target audience are minorities who feel discriminated due to their race or gender. They believe that there is still inequality in the work place.  With the data  that our team analyzes, this can prove to our audience that there still is a discrimination in the workplace due to race or gender. 
+
+
 ### Technical Analysis
 
  **The Data**
@@ -17,3 +24,5 @@ In this project, we will stick to the `dplyr` and   `tidyr` to manipulate and re
 One of the biggest challenge in this project that we anticipate is wrangling data, as the data we downloaded from external websites contains a lot of useless and unexpected information. This requires a huge amount of time to cleanup and organize. Furthermore, the way we analyze and demonstrate data requires us to have a clear understanding of our targeted audience and their needs.
 
 Through analyzing the data, we will have a straightforward perception towards how the trend of people being conferred changes over time, the demographics of the graduate in different majors and ethnicities. This will not only gives us opportunity to understand the past, but also a way to predict the changes in the future.
+
+
