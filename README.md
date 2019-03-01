@@ -1,7 +1,6 @@
 # Final Project Proposal
 
 ![Gender Wage Gap](https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png)
-
 ###### Copyright [Recruiting Times](https://recruitingtimes.org/recruitment-and-hr-features/15987/uk-businesses-report-gender-pay-gap-2018/)
 
 ### Project Description
