@@ -1,7 +1,7 @@
 # Final Project Proposal
 
 <center>
-![](https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png)
+![j](https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png)
 </center>
 
 ### Project Description
