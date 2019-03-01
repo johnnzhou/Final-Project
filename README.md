@@ -4,9 +4,9 @@
 ### Project Description
 My group will use the dataset about education in America starting from prekindergarten through graduate school. Institute of Education Sciences gathered these statistics through surveys across 
 United States. The website of National Center for Education Statistics allowed me to gain access 
-for the data. Lastly, this database includes education information from 1995 to current year.
+for the data. The [**database**](https://nces.ed.gov/programs/digest/) we are using includes education information starting from 1995 to current year. More specifically, we will be looking at statistics about genders, degree types, study areas, and race.
 
-Our  target audience are minorities who feel discriminated due to their race or gender. They believe that there is still inequality in the work place.  With the data  that our team analyzes, this can prove to our audience that there still is a discrimination in the workplace due to race or gender. 
+Our target audience are minorities who feel discriminated due to their race or gender. They believe that there is still inequality in the work place.  With the data  that our team analyzes, this can prove to our audience that there still is a discrimination in the workplace due to race or gender. 
 
 
 ### Technical Analysis
