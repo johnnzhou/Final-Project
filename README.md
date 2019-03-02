@@ -1,7 +1,7 @@
 # Final Project Proposal
 
 ![Gender Wage Gap](https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png)
-###### Copyright Recruiting Times
+（Copyright Recruiting Times）
 
 ### Project Description
 - Our group will use the statistics of enrollment of each major in universities. Institute of Education Sciences gathered these statistics through surveys across
@@ -32,6 +32,6 @@ In this project, we will stick to common libraries, such as `dplyr` and   `tidyr
 
 **Challenges**
 
-One of the biggest challenge in this project we anticipate is data wrangling, as the data we acquired from external websites contains a lot of unexpected data. It requires a huge amount of time to cleanup and organize the files into the way we expect. Furthermore, the way we analyze and demonstrate data requires us to have a clear understanding of our targeted audience and their needs. Therefore, wrangling the data correctly would be a great challenge when we conduct our project.
+One of the biggest challenge in this project we anticipate is how to wrangle the datasets so that our audience can gain some insights from the data visualizations. As the data we acquired from external websites contains a lot of unexpected data and data formats, it requires a huge amount of time to logically order information, cleanup and analyze the data into the way we expect. Data visualization allows us to effectively and efficiently communicate with our audience. However, another challenge we would encounter is to allow viewers to easily navigate the information, making it easy for them to filter and compare values. Hence, for our tagarted audience, especially minoritiy groups, we need to have correct and clear understandings towards their potential needs. Therefore, wrangling the data correctly would be a great challenge when we conduct our project.
 
-Through analyzing the data, we will have a straightforward perception towards how the trend of people being conferred changes over time, what are some top paid majors and who tends to study them, and vise versa. This will not only gives us opportunity to understand the past, but also a way to predict the changes in the future.
+Through analyzing the data, we will have a straightforward perception towards how the trend of people being conferred changes over time, what are some top paid majors and who tends to study them,and vise versa. This will not only gives us opportunity to understand the past, but also a way to predict the changes in the future.
