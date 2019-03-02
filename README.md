@@ -1,7 +1,15 @@
 # Final Project Proposal
 
+
+
 ![Gender Wage Gap](https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png)
-（Copyright Recruiting Times）
+##### Copyright Recruiting Times
+
+### Authors:
+- Jason Li
+- John Zhou
+- Colson Xu
+- Matthew Xu
 
 ### Project Description
 - Our group will use the statistics of enrollment of each major in universities. Institute of Education Sciences gathered these statistics through surveys across
