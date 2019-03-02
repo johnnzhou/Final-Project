@@ -6,9 +6,9 @@
 ### Project Description
 - Our group will use the statistics of enrollment of each major in universities. Institute of Education Sciences gathered these statistics through surveys across
 United States. The website of National Center for Education Statistics allowed me to gain access
-for the data. The [**database**](https://nces.ed.gov/programs/digest/) we are using includes education information starting from 2012 to current year. More specifically, we will be looking at statistics about genders, degree types, and study areas.
+for the data. The [**database**](https://nces.ed.gov/programs/digest/) we are using includes education information starting from 2012 to current year. More specifically, we will be looking at statistics about genders, degree types, and study area.
 
-- Our target audience are minorities who feel discriminated due to their gender. They believe that there are gender salary gaps.  With the data  that our team analyzes, we can find out the true reason behind gender salary gap.
+- This data set can be beneficial for many people to view. However, our main target audience are minorities because they may feel discriminated due to their gender. They might believe that there are gender salary gaps. With the data that our team analyzes, we can compare different years of salaries for males and females. In addition, degree types and study areas may also provide evidence that support the gap. Using this dataset, we can help our target audience discover the real reason behind gender salary gap. 
 
 - The audience of this project will, _hopefully_, learn:
   1. Are there really gender salary gaps.
