@@ -28,7 +28,7 @@ Our goal is to visualize the number of people being conferred based on a list of
 
 **Libraries**
 
-In this project, we will stick to common libraries, such as `dplyr` and   `tidyr` to manipulate and reshape our primary datasets. In terms of plotting, we will utilize `plotly` as well as `ggplot2`, as these two libraries would give us more functionalities and flexibility when combining `Shiny`, particularly `plotly` library. We will also use `shiny` library when creating website for data visualization.
+In this project, we will stick to common libraries, such as `dplyr` and `tidyr` to manipulate and reshape our primary datasets. In terms of plotting, we will utilize `plotly` as well as `ggplot2`, as these two libraries would give us more functionalities and flexibility when combining with `Shiny`. `plotly` library, in particular, would  enables interactive graphics and reactive functions for users. We will also use `shiny` library when creating website for data visualization.
 
 **Challenges**
 
