@@ -1,13 +1,12 @@
 # Final Project Proposal
 
+![Gender Wage Gap](https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png)
+
 ### Author:
 - Jason Li
 - John Zhou
 - Colson Xu
 - Matthew Xu
-
-
-![Gender Wage Gap](https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png)
 
 ##### Copyright Recruiting Times
 
