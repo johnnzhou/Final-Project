@@ -23,6 +23,7 @@ for the data. The [**database**](https://nces.ed.gov/programs/digest/) we are us
   1. Are there really gender gaps.
   2. What is the cause of gender gaps.
   3. Gender Difference in different majors.
+  4. Salary gap between majors and genders.
 
 
 ### Technical Analysis
