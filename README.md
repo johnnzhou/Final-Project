@@ -20,9 +20,9 @@ for the data. The [**database**](https://nces.ed.gov/programs/digest/) we are us
 - This data set can be beneficial for many people to view. However, our target audience are females because they may feel discriminated due to their gender. They might believe that there are gender salary gaps. With the data that our team analyzes, we can compare different years of salaries for each college major. Then we will analyze major choices that males and females tend to make. Using this dataset, we can help our target audience discover the real reason behind gender salary gap. 
 
 - The audience of this project will, _hopefully_, learn:
-  1. Are there really gender gaps.
-  2. What is the cause of gender gaps.
-  3. Gender Difference in different majors.
+  1. gender and salary gaps armong different majors.
+  2. the cause of gender gaps.
+  3. gender difference in different majors.
   4. Salary gap between majors and genders.
 
 
