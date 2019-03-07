@@ -16,7 +16,7 @@
 United States. The website of National Center for Education Statistics allowed me to gain access
 for the data. The [**database**](https://nces.ed.gov/programs/digest/) we are using includes education information starting from 2012 to current year. More specifically, we will be looking at statistics about genders, degree types, study areas, and ethnicities. 
 
-- This data set can be beneficial for many people to view. However, our main target audience are minorities because they may feel discriminated due to their gender. They might believe that there are gender salary gaps. With the data that our team analyzes, we can compare different years of salaries for males and females. In addition, degree types and study areas may also provide evidence that support the gap. Using this dataset, we can help our target audience discover the real reason behind gender salary gap. 
+- This data set can be beneficial for many people to view. However, our target audience are females because they may feel discriminated due to their gender. They might believe that there are gender salary gaps. With the data that our team analyzes, we can compare different years of salaries for each college major. Then we will analyze major choices that males and females tend to make. Using this dataset, we can help our target audience discover the real reason behind gender salary gap. 
 
 - The audience of this project will, _hopefully_, learn:
   1. Are there really gender salary gaps.
