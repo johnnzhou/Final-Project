@@ -1,26 +1,46 @@
-#
-# This is the server logic of a Shiny web application. You can run the 
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
-#
 
 library(shiny)
+source("analysis.R")
 
-# Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-   
-  output$distPlot <- renderPlot({
-    
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2] 
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
-    
-  })
+    diff_data <- reactive({
+        difference <- major_enrollment %>% 
+                        arrange(-diff) %>% 
+                        filter(Major %in% input$major_list) %>% 
+                        select(Major, Males, Females) %>% 
+                        melt(id.vars = "Major",
+                             variable.name = "Gender",
+                             value.name = "Number")
+                        
+                        
+        return(difference)
+    })
+    # output$text <- renderText({
+    #     major_list
+    # })
+    output$diff_plot <- renderPlot({
+        diff_plot <- ggplot(diff_data()) +
+            geom_bar(stat = "identity",
+                     mapping = aes(
+                         x = Major,
+                         y = Number,
+                         fill = Gender    
+                     )
+            )+
+            geom_text(aes(x = Major,
+                          y = Number,
+                          label = Number), 
+                          vjust=1.6, 
+                          color="black",
+                          size = 3
+                          )+
+            scale_fill_brewer(palette = "Set3")+
+            labs(
+                x = "Majors",
+                y = "Difference of number of people in the major by gender"
+            )+
+            theme(axis.text.x = element_text(angle = 90, hjust = 1))
+        return(diff_plot)
+    })
   
 })

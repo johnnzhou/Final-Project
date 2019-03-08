@@ -1,28 +1,25 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
-#
+# install.packages("shiny")
 
 library(shiny)
-
+source("analysis.R")
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
     "Gender and Salary",
-    
     # tab 1
     tabPanel(
-        "",
-        titlePanel(""),
+        "Gender Difference in Majors",
+        titlePanel("Gender Difference in Majors"),
         sidebarLayout(
             sidebarPanel(
-                sliderInput()
+                checkboxGroupInput("major_list", 
+                                   "Majors",
+                                   selected = major_list, 
+                                   choices = major_list)
+                
             ),
             mainPanel(
-                plotOutput("")
+                plotOutput("diff_plot", height = "900px")
+                # textOutput("text")
             )
         )
     ),
@@ -33,7 +30,7 @@ shinyUI(fluidPage(
         titlePanel(""),
         sidebarLayout(
             sidebarPanel(
-                sliderInput()
+                
             ),
             mainPanel(
                 plotOutput("")
@@ -47,7 +44,7 @@ shinyUI(fluidPage(
         titlePanel(""),
         sidebarLayout(
             sidebarPanel(
-                sliderInput()
+                
             ),
             mainPanel(
                 plotOutput("")
@@ -61,7 +58,7 @@ shinyUI(fluidPage(
         titlePanel(""),
         sidebarLayout(
             sidebarPanel(
-                sliderInput()
+                
             ),
             mainPanel(
                 plotOutput("")
