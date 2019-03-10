@@ -9,7 +9,7 @@
 - Jason Li
 - John Zhou
 - Colson Xu
-- Matthew Xu
+- Matthew Cho
 
 
 ### Project Description
