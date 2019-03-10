@@ -3,9 +3,24 @@ library("tableHTML")
 library(shiny)
 source("analysis.R")
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(
+ui <- navbarPage(
     "Gender and Salary",
-    # tab 1
+    
+    # Overview
+    tabPanel(
+        "Overview",
+        titlePanel(""),
+        sidebarLayout(
+            sidebarPanel(
+                
+            ),
+            mainPanel(
+                plotOutput("")
+            )
+        )
+    ),
+    
+    # tab 2
     tabPanel(
         "Gender Difference in Majors",
         titlePanel("Gender Difference in Majors"),
@@ -33,22 +48,39 @@ shinyUI(fluidPage(
         )
     ),
     
-    # tab 2
+    # tab 3
     tabPanel(
-        "",
-        titlePanel(""),
+        "The Main Contributor to Wage Gap",
+        titlePanel("Female Percentage vs. Major Median Salary"),
         sidebarLayout(
             sidebarPanel(
-                
+                checkboxInput("trend", label = "Show Trend Line", value = F),
+                sliderInput("perc_select", label = "Select Percentage Range",
+                            min = 0, max = 1, value = c(0, 1))
             ),
             mainPanel(
-                plotOutput("")
+                plotlyOutput("female_perc_vs_major_pay")
             )
         )
     ),
     
-    # tab 3
+    # tab4
     tabPanel(
+        "Tab 4",
+        titlePanel(""),
+        sidebarLayout(
+            sidebarPanel(
+                # sliderInput()
+            ),
+            mainPanel(
+                
+            )
+        )
+    ),
+
+    # tab 5
+    tabPanel(
+        "About Us",
         "",
         titlePanel(""),
         sidebarLayout(
@@ -70,8 +102,8 @@ shinyUI(fluidPage(
                 
             ),
             mainPanel(
-                plotOutput("")
+                
             )
         )
     )
-))
+)

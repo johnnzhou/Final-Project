@@ -10,7 +10,8 @@ library("ggplot2")
 library("plotly")
 
 ## John
-major_enrollment <- read.csv("../data/major_enrollment.csv", stringsAsFactors = FALSE)
+major_enrollment <-
+    read.csv("../data/major_enrollment.csv", stringsAsFactors = FALSE)
 
 major_enrollment$diff <- major_enrollment$male - major_enrollment$female
 major_enrollment <- major_enrollment %>% 
