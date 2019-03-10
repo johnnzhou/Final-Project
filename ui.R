@@ -2,60 +2,76 @@ library(shiny)
 
 # Define UI for application that draws a histogram
 ui <- navbarPage(
-    "Gender and Salary",
-    
+    "One Reason for Gender Wage Gap",
+
     # tab 1
     tabPanel(
-        "",
+        "Overview",
         titlePanel(""),
         sidebarLayout(
             sidebarPanel(
-                sliderInput()
+                
             ),
             mainPanel(
-                plotOutput("")
+                
             )
         )
     ),
-    
+
     # tab 2
     tabPanel(
-        "",
+        "Gender Distribution in Majors",
         titlePanel(""),
         sidebarLayout(
             sidebarPanel(
-                sliderInput()
+                
             ),
             mainPanel(
-                plotOutput("")
+                
             )
         )
     ),
     
     # tab 3
     tabPanel(
-        "",
-        titlePanel(""),
+        "The Main Contributor to Wage Gap",
+        titlePanel("Female Percentage vs. Major Median Salary"),
         sidebarLayout(
             sidebarPanel(
-                sliderInput()
+                checkboxInput("trend", label = "Show Trend Line", value = F),
+                sliderInput("perc_select", label = "Select Percentage Range",
+                            min = 0, max = 1, value = c(0, 1))
             ),
             mainPanel(
-                plotOutput("")
+                plotlyOutput("female_perc_vs_major_pay")
             )
         )
-    ),   
+    ),
     
     # tab4
     tabPanel(
-        "",
+        "Tab 4",
         titlePanel(""),
         sidebarLayout(
             sidebarPanel(
-                sliderInput()
+                # sliderInput()
             ),
             mainPanel(
-                plotOutput("")
+                
+            )
+        )
+    ),
+
+    # tab 5
+    tabPanel(
+        "About Us",
+        titlePanel(""),
+        sidebarLayout(
+            sidebarPanel(
+                
+            ),
+            mainPanel(
+                
             )
         )
     )
