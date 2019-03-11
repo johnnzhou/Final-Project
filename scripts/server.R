@@ -4,21 +4,11 @@ library(plotly)
 library(shiny)
 source("analysis.R")
 
-major_enrollment <- read.csv("../data/major_enrollment.csv", stringsAsFactors = F)
+major_enrollment1 <- read.csv("../data/major_enrollment.csv", 
+                             stringsAsFactors = FALSE)
 
 
 server <- function(input, output) {
-    
-    output$dist_plot <- renderPlot({
-        
-        # generate bins based on input$bins from ui.R
-        x <- faithful[, 2] 
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-        
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = "darkgray", border = "white")
-        
-    })
     
     diff_data <- reactive({
         difference <- major_enrollment %>% 
@@ -120,7 +110,7 @@ server <- function(input, output) {
     
     perc_range <- reactive({
         range <- input$perc_select
-        major_enrollment <- filter(major_enrollment,
+        major_enrollment <- filter(major_enrollment1,
                                    perc_to_double(perc_female) > range[1],
                                    perc_to_double(perc_female) < range[2])
     })
