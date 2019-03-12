@@ -10,14 +10,14 @@ ui <- navbarPage(
     tabPanel(
         "Overview",
         titlePanel("Overview: Gender, Major and Salary Gap"),
-        img(src = 
+        img(src =
 "https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png"),
         h6("Copyright Recruiting Times"),
         h3("Author:"),
-        tags$li("Jason Li"), 
-        tags$li("Zhennan Zhou"), 
-        tags$li("Colson Xu"), 
+        tags$li("Colson Xu"),
+        tags$li("Jason Li"),
         tags$li("Matthew Cho"),
+        tags$li("Zhennan Zhou"),
         h3("Project Description"),
         p("Our group will use the statistics of enrollment of each major in universities. 
             Institute of Education Sciences gathered these statistics through surveys across

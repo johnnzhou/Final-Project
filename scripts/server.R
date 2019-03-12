@@ -4,7 +4,7 @@ library(plotly)
 library(shiny)
 source("analysis.R")
 
-major_enrollment1 <- read.csv("../data/major_enrollment.csv", 
+major_data <- read.csv("../data/major_enrollment.csv", 
                              stringsAsFactors = FALSE)
 
 
@@ -110,7 +110,7 @@ server <- function(input, output) {
     
     perc_range <- reactive({
         range <- input$perc_select
-        major_enrollment <- filter(major_enrollment1,
+        major_enrollment <- filter(major_data,
                                    perc_to_double(perc_female) > range[1],
                                    perc_to_double(perc_female) < range[2])
     })
