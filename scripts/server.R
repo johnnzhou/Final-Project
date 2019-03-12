@@ -188,18 +188,17 @@ server <- function(input, output) {
     #creates a graph of the top 10 jobs and the bottom 10 jobs
     output$job_plot <- renderPlot({
         if (input$work == 1) {
-        job_plot <- ggplot(data = most()) +
-            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
-            labs(x = "Job Title", y = "Salary", title = "Top 10 paid jobs in U.S") +
-            theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
-                                                         hjust = 0.5))
+        x <- most()
+        title <- "Top 10 paid jobs in U.S"
+        } else {
+        x <- least()
+        title <- "Least 10 paid jobs in U.S"
         }
-        else {
-        job_plot <- ggplot(data = least()) +
-            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
-            labs(x = "Job Title", y = "Salary", title = "Least 10 paid jobs in U.S") +
-            theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
+        ggplot(data = x, las =4) +
+            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary,
+                                                      fill = Occupation)) +
+            labs(x = "Job Title", y = "Salary", title = title) +
+            theme_bw() + theme(plot.title = element_text(size = 30, face = "bold",
                                                          hjust = 0.5))
-        }
     })
 }

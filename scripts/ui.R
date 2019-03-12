@@ -96,7 +96,7 @@ ui <- navbarPage(
                             choices = list("Top" = 1, "Bottom" = 2))
             ),
             mainPanel(
-                plotOutput("job_plot")
+                plotOutput("job_plot", width = "900px")
             )
         )
     ),
