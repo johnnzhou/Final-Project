@@ -5,9 +5,11 @@ library(shiny)
 library(ggplot2)
 source("analysis.R")
 
-major_data <- read.csv("../data/major_enrollment.csv", stringsAsFactors = F)
+major_enrollment1 <- read.csv("../data/major_enrollment.csv", 
+                             stringsAsFactors = FALSE)
 jobs <- read.csv("../data/job_salary_and_gender_percentage.csv",
                  stringsAsFactors = FALSE)
+
 
 server <- function(input, output) {
     
@@ -21,7 +23,6 @@ server <- function(input, output) {
                              value.name = "percentage")
         return(difference)
     })
-    
     output$diff_plot <- renderPlot({
         diff_plot <- ggplot(diff_data()) +
             geom_bar(stat = "identity",
@@ -31,29 +32,29 @@ server <- function(input, output) {
                          fill = type,
                          width=0.8
                      )
-            ) +
+            )+
             geom_text(aes(x = major,
                           y = percentage,
                           label = paste0(round(percentage),"%")), 
                           vjust=1.6, 
                           color="black",
                           size = 3
-                          ) +
-            scale_fill_brewer(palette = "Set3") +
+                          )+
+            scale_fill_brewer(palette = "Set3")+
             labs(
                 title = "Male Dominant Majors",
                 x = "",
                 y = "Number of people in the major by gender",
                 fill = ""
-            ) +
+            )+
             theme(
                 plot.title = element_text(
                     hjust = 0.5,
                     vjust = 0.5,
                     face = "bold"
                 )
-            ) +
-            theme(legend.position="bottom", legend.box = "horizontal") +
+            )+
+            theme(legend.position="bottom", legend.box = "horizontal")+
             theme(axis.text.x = element_text(angle = 90, hjust = 1))
         return(diff_plot)
     })
@@ -78,28 +79,28 @@ server <- function(input, output) {
                          fill = type,
                          width=0.8
                      )
-            ) +
+            )+
             geom_text(aes(x = major,
                           y = percentage,
                           label = paste0(round(percentage),"%")), 
-                      vjust=-0.9, 
+                      vjust=1.6, 
                       color="black",
                       size = 3
-            ) +
-            scale_fill_brewer(palette = "Set2") +
+            )+
+            scale_fill_brewer(palette = "Set2")+
             labs(
                 title = "Female Dominant Majors",
                 x = "",
                 y = "Number of people in the major by gender",
                 fill = ""
-            ) +
+            )+
             theme(
                 plot.title = element_text(
                     hjust = 0.5,
                     vjust = 0.5,
                     face = "bold"
                 )
-            ) +
+            )+
             theme(legend.position="bottom", legend.box = "horizontal")+
             theme(axis.text.x = element_text(angle = 90, hjust = 1))
         return(diff_plot_least)
@@ -112,7 +113,7 @@ server <- function(input, output) {
     
     perc_range <- reactive({
         range <- input$perc_select
-        major_enrollment <- filter(major_data,
+        major_enrollment <- filter(major_enrollment1,
                                    perc_to_double(perc_female) > range[1],
                                    perc_to_double(perc_female) < range[2])
     })
@@ -152,37 +153,6 @@ server <- function(input, output) {
         p
     })
     
-    output$male_perc_vs_major_pay <- renderPlotly({
-        p <- plot_ly(
-            x = perc_to_double(perc_range()$perc_male),
-            y = perc_range()$median_pay,
-            type = "scatter",
-            mode = "markers",
-            color = perc_range()$median_pay,
-            size = perc_range()$median_pay,
-            showlegend = F,
-            text = paste("Major:", perc_range()$major,
-                         "<br>Percentage of Male:",
-                         perc_range()$perc_male,
-                         "<br>Median Salary After 5 Years:",
-                         perc_range()$median_pay),
-            hoverinfo = "text"
-            
-        ) %>%
-            layout(title = "Major Male Percentage vs Major Median Pay",
-                   xaxis =
-                       list(title = "Percentage of Male in Majors"),
-                   yaxis =
-                       list(title = "Median Salary for Majors After 5 Years"))
-        
-        if (trend_line()) {
-            p <- add_lines(p, y = ~fitted(loess(
-                perc_range()$median_pay ~
-                    perc_to_double(perc_range()$perc_male))))
-        }
-        p
-    })
-    
     ############################ Matthew ############################    
    
     #this data frame shows the bottom 10 paid jobs and the gender percentage
@@ -218,18 +188,17 @@ server <- function(input, output) {
     #creates a graph of the top 10 jobs and the bottom 10 jobs
     output$job_plot <- renderPlot({
         if (input$work == 1) {
-        job_plot <- ggplot(data = most()) +
-            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
-            labs(x = "Job Title", y = "Salary", title = "Top 10 paid jobs in U.S") +
-            theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
-                                                         hjust = 0.5))
+        x <- most()
+        title <- "Top 10 paid jobs in U.S"
+        } else {
+        x <- least()
+        title <- "Least 10 paid jobs in U.S"
         }
-        else {
-        job_plot <- ggplot(data = least()) +
-            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
-            labs(x = "Job Title", y = "Salary", title = "Least 10 paid jobs in U.S") +
-            theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
+        ggplot(data = x, las =4) +
+            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary,
+                                                      fill = Occupation)) +
+            labs(x = "Job Title", y = "Salary", title = title) +
+            theme_bw() + theme(plot.title = element_text(size = 30, face = "bold",
                                                          hjust = 0.5))
-        }
     })
 }
