@@ -83,7 +83,7 @@ server <- function(input, output) {
             geom_text(aes(x = major,
                           y = percentage,
                           label = paste0(round(percentage),"%")), 
-                      vjust=1.6, 
+                      vjust=-0.9, 
                       color="black",
                       size = 3
             )+

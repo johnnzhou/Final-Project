@@ -3,12 +3,38 @@ library("tableHTML")
 library(shiny)
 source("analysis.R")
 # Define UI for application that draws a histogram
-ui <- navbarPage(
+shinyUI(navbarPage(
     "Gender and Salary",
     
     # Overview
     tabPanel(
         "Overview",
+        tags$style(HTML("
+             @import url('https://fonts.googleapis.com/css?family=Oswald:500');
+            body {
+                background-color:#f9f9f9
+            }          
+            h2 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 500;
+                        line-height: 1.1;
+                        color: #393c42;
+            }
+            h3 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 500;
+                        line-height: 1.1;
+                        color: #393c42;
+            }
+            h6 {
+						font-family: 'Oswald', sans-serif;
+                        font-weight: 100;
+                        line-height: 1.1;
+                        color: #545859;
+                        text-align: left;
+            }
+                        
+        ")),
         titlePanel("Exploring Salary Gap in Genders and Majors"),
         img(src = 
 "https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png"),
@@ -112,4 +138,4 @@ ui <- navbarPage(
         titlePanel("")
         
     )
-)
+))
