@@ -1,8 +1,9 @@
 # install.packages("shiny")
+# install.packages("tableHTML")
 library("tableHTML")
 library(shiny)
 source("analysis.R")
-# Define UI for application that draws a histogram
+
 ui <- navbarPage(
     "Gender and Salary",
     
@@ -92,8 +93,14 @@ ui <- navbarPage(
         titlePanel("Gender Difference in Top 10 jobs vs Bottom 10 jobs"),
         sidebarLayout(
             sidebarPanel(
-                selectInput("work", label = h3("Top 10 vs Bottom 10"),
-                            choices = list("Top" = 1, "Bottom" = 2))
+                # selectInput("work", label = h3("Top 10 vs Bottom 10"),
+                #             choices = list("Top" = 1, "Bottom" = 2)),
+              checkboxGroupInput(
+                  "radio", 
+                  label = "Select a occupation",
+                  choices = name_list,
+                  selected = name_list
+                )
             ),
             mainPanel(
                 plotOutput("job_plot")

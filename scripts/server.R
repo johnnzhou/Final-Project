@@ -152,53 +152,78 @@ server <- function(input, output) {
         }
         p
     })
+    ############################ Jason ################################
+    create_bargraph <- reactive({
+      job_plot <- best_25 %>%
+        filter(Occupation %in% input$radio)
+      
+      return(job_plot)
+    })
+
+    output$job_plot <- renderPlot({
+      job <- ggplot(create_bargraph())+
+                geom_bar(stat = "identity",
+                 mapping = aes(x = Occupation,
+                               y = Salary,
+                               fill = Occupation))+
+        labs(title = "Occupation Salaries") +
+        theme(plot.title = element_text(family = "Trebuchet MS", face="bold",
+                                        size=20, hjust=0)) +
+        xlab("Occupation") +
+        ylab("Salary")+
+        theme(axis.text.x = element_text(angle = 0, hjust = 1))+
+        coord_flip()
+      
+      return(job)
+    })
+    
     ############################ Matthew ############################    
    
     #this data frame shows the bottom 10 paid jobs and the gender percentage
     #in those jobs
-     least <- reactive({
-        low <- jobs %>%
-            select(Occupation, Median.earnings.total,
-                   Percentage.of.women.in.occupational.group) %>%
-            rename(Occupation = Occupation, salary = Median.earnings.total,
-                   women = Percentage.of.women.in.occupational.group) %>%
-            mutate(men = 100 - women) %>%
-            arrange(salary) %>%
-            head(10) %>%
-            as.data.frame()
-        return(low)
-    })
-    
-    #this data frameshows the top 10 paid jobs and the gender percentage
-    #in those jobs
-    most <- reactive({
-        high <- jobs %>%
-            select(Occupation, Median.earnings.total,
-                   Percentage.of.women.in.occupational.group) %>%
-            rename(Occupation = Occupation, salary = Median.earnings.total, 
-                   women = Percentage.of.women.in.occupational.group) %>%
-            mutate(men = 100 - women) %>%
-            arrange(-salary) %>%
-            head(10) %>%
-            as.data.frame()
-        return(high)
-    })
-    
-    #creates a graph of the top 10 jobs and the bottom 10 jobs
-    output$job_plot <- renderPlot({
-        if (input$work == 1) {
-        job_plot <- ggplot(data = most()) +
-            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
-            labs(x = "Job Title", y = "Salary", title = "Top 10 paid jobs in U.S") +
-            theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
-                                                         hjust = 0.5))
-        }
-        else {
-        job_plot <- ggplot(data = least()) +
-            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
-            labs(x = "Job Title", y = "Salary", title = "Least 10 paid jobs in U.S") +
-            theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
-                                                         hjust = 0.5))
-        }
-    })
+    #  least <- reactive({
+    #     low <- jobs %>%
+    #         select(Occupation, Median.earnings.total,
+    #                Percentage.of.women.in.occupational.group) %>%
+    #         rename(Occupation = Occupation, salary = Median.earnings.total,
+    #                women = Percentage.of.women.in.occupational.group) %>%
+    #         mutate(men = 100 - women) %>%
+    #         arrange(salary) %>%
+    #         head(10) %>%
+    #         as.data.frame()
+    #     return(low)
+    # })
+    # 
+    # #this data frameshows the top 10 paid jobs and the gender percentage
+    # #in those jobs
+    # most <- reactive({
+    #     high <- jobs %>%
+    #         select(Occupation, Median.earnings.total,
+    #                Percentage.of.women.in.occupational.group) %>%
+    #         rename(Occupation = Occupation, salary = Median.earnings.total,
+    #                women = Percentage.of.women.in.occupational.group) %>%
+    #         mutate(men = 100 - women) %>%
+    #         arrange(-salary) %>%
+    #         head(10) %>%
+    #         as.data.frame()
+    #     return(high)
+    # })
+    # 
+    # #creates a graph of the top 10 jobs and the bottom 10 jobs
+    # output$job_plot <- renderPlot({
+    #     if (input$work == 1) {
+    #     job_plot <- ggplot(data = most()) +
+    #         geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
+    #         labs(x = "Job Title", y = "Salary", title = "Top 10 paid jobs in U.S") +
+    #         theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
+    #                                                      hjust = 0.5))
+    #     }
+    #     else {
+    #     job_plot <- ggplot(data = least()) +
+    #         geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
+    #         labs(x = "Job Title", y = "Salary", title = "Least 10 paid jobs in U.S") +
+    #         theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
+    #                                                      hjust = 0.5))
+    #     }
+    # })
 }

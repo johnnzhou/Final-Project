@@ -38,6 +38,30 @@ colnames(major_enrollment) <- c("major",
 major_list_top <- unlist(major_list_top, use.names = FALSE)
 major_list_least <- unlist(major_list_least, use.names = FALSE)
 
+####################### Jason ###################################
+best_25 <- read.csv("../data/best_25.csv", stringsAsFactors = FALSE)
+worst_25 <- read.csv("../data/worst_25.csv", stringsAsFactors = FALSE)
 
-overview <- my_data <- read.delim("../README.md")
-                
+
+colnames(best_25) <- c("Occupation", "Salary")
+colnames(worst_25) <- c("Occupation", "Salary")
+
+name_list <- best_25 %>% 
+              select(Occupation) %>% 
+              head(10) %>% 
+              unlist(use.names = FALSE)
+
+
+
+create_bargraph <- best_25 %>%
+    filter(Occupation %in% list("Computer Science and Engineering", "Electrical Engineering"))
+
+
+
+  job <- ggplot(create_bargraph)+
+    geom_bar(stat = "identity",
+             mapping = aes(x = Occupation,
+                           y = Salary))
+
+
+
