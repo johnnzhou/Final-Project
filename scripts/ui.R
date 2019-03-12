@@ -85,7 +85,8 @@ ui <- navbarPage(
         )
     ),
     
-    # tab4
+    # This tab shows the top 10 jobs and the bottom 10 jobs and the 
+    # gender difference in those jobs
     tabPanel(
         "Gender Difference in Jobs",
         titlePanel("Gender Difference in Top 10 jobs vs Bottom 10 jobs"),

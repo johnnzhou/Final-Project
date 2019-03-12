@@ -154,8 +154,11 @@ server <- function(input, output) {
     })
     
     ############################ Matthew ############################    
-    least <- reactive({
-        least <- jobs %>%
+   
+    #this data frame shows the bottom 10 paid jobs and the gender percentage
+    #in those jobs
+     least <- reactive({
+        low <- jobs %>%
             select(Occupation, Median.earnings.total,
                    Percentage.of.women.in.occupational.group) %>%
             rename(Occupation = Occupation, salary = Median.earnings.total,
@@ -164,11 +167,13 @@ server <- function(input, output) {
             arrange(salary) %>%
             head(10) %>%
             as.data.frame()
-        return(least)
+        return(low)
     })
     
+    #this data frameshows the top 10 paid jobs and the gender percentage
+    #in those jobs
     most <- reactive({
-        most <- jobs %>%
+        high <- jobs %>%
             select(Occupation, Median.earnings.total,
                    Percentage.of.women.in.occupational.group) %>%
             rename(Occupation = Occupation, salary = Median.earnings.total, 
@@ -177,9 +182,10 @@ server <- function(input, output) {
             arrange(-salary) %>%
             head(10) %>%
             as.data.frame()
-        return(most)
+        return(high)
     })
     
+    #creates a graph of the top 10 jobs and the bottom 10 jobs
     output$job_plot <- renderPlot({
         if (input$work == 1) {
         job_plot <- ggplot(data = most()) +
