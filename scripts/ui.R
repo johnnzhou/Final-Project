@@ -1,9 +1,9 @@
-# install.packages("shiny")
 library("tableHTML")
 library(shiny)
 source("analysis.R")
+
 # Define UI for application that draws a histogram
-shinyUI(navbarPage(
+ui <- navbarPage(
     "Gender and Salary",
     
     # Overview
@@ -33,14 +33,14 @@ shinyUI(navbarPage(
                         
         ")),
         titlePanel("Exploring Salary Gap in Genders and Majors"),
-        img(src = 
+        img(src =
 "https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png"),
         h6("Copyright Recruiting Times"),
         h3("Authors:"),
-        tags$li("Jason Li"), 
-        tags$li("Zhennan Zhou"), 
-        tags$li("Colson Xu"), 
+        tags$li("Colson Xu"),
+        tags$li("Jason Li"),
         tags$li("Matthew Cho"),
+        tags$li("Zhennan Zhou"),
         h3("Project Description"),
         p("Our group utilizes the data of enrollment of each major in universities from
             Institute of Education Sciences gathered through surveys across
@@ -55,7 +55,7 @@ shinyUI(navbarPage(
         h3("Data"),
         p("Understanding data is a key part in analyzing and organizing data.
           As we're aware of the difficulty of sourcing data via API, we chose to use the", em(".csv"), "data downloaded from the",
-          a(strong("National Center for Education Statistics"),href="https://nces.ed.gov/"), "in this project."),
+          a(strong("National Center for Education Statistics"), href="https://nces.ed.gov/"), "in this project."),
         h3("Audience"),
         p("While anybody can get some benefits from this report, 
           our targeted audience for this project are those who care about the salary gap in different majors and genders;
@@ -63,7 +63,7 @@ shinyUI(navbarPage(
           people who are concerned about gender inequality in the areas they are majoring in.
         
           With gender and salary gap becoming an increasingly important and highly-debated topic,
-        we expect there to be a lot of people looking for this kind of information. 
+          we expect there to be a lot of people looking for this kind of information. 
           We hope their concerns are answered through various visualizations.
           ")
         
@@ -91,6 +91,7 @@ shinyUI(navbarPage(
             ),
             mainPanel(
                 plotOutput("diff_plot", height = "600px"),
+                hr(),
                 plotOutput("diff_plot_least", height = "600px")
                 # textOutput("text")
             )
@@ -105,10 +106,27 @@ shinyUI(navbarPage(
             sidebarPanel(
                 checkboxInput("trend", label = "Show Trend Line", value = F),
                 sliderInput("perc_select", label = "Select Percentage Range",
-                            min = 0, max = 1, value = c(0, 1))
+                            min = 0, max = 1, value = c(0, 1)),
+                hr(),
+                h4("In this study, we compare how male and female choose
+                  their major, and how those major pays in five years.
+                  We believe this study can best reflect the real reason behind
+                  gender salary gap. The reason is that through comparing
+                  major choice and how well ", strong("that major "), "pays, 
+                  we illiminate individual factors that create wage gap like
+                  how one perform in job and how he/she is willing to show up
+                  anytime his/her boss calls without prior notice.
+                  Thus, we can isolate the one variable we want to study: ",
+                  strong("INDIVIDUAL MAJOR CHOICE"), br(), br(),
+                  "Furthermore, the salary data we use is the median base
+                  salary after working in a position 5 years. ", strong(
+                  "It illiminates confunding variables like pregnancy leave
+                  and individual performance."))
             ),
             mainPanel(
-                plotlyOutput("female_perc_vs_major_pay")
+                plotlyOutput("female_perc_vs_major_pay"),
+                hr(),
+                plotlyOutput("male_perc_vs_major_pay")
             )
         )
     ),
@@ -135,4 +153,4 @@ shinyUI(navbarPage(
         titlePanel("")
         
     )
-))
+)
