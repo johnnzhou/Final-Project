@@ -1,12 +1,10 @@
-# install.packages("shiny")
-library("tableHTML")
+library(tableHTML)
 library(shiny)
 source("analysis.R")
+
 # Define UI for application that draws a histogram
 ui <- navbarPage(
     "Gender and Salary",
-    
-    # Overview
     tabPanel(
         "Overview",
         titlePanel("Overview: Gender, Major and Salary Gap"),
@@ -77,10 +75,27 @@ ui <- navbarPage(
             sidebarPanel(
                 checkboxInput("trend", label = "Show Trend Line", value = F),
                 sliderInput("perc_select", label = "Select Percentage Range",
-                            min = 0, max = 1, value = c(0, 1))
+                            min = 0, max = 1, value = c(0, 1)),
+                hr(),
+                h4("In this study, we compare how male and female choose
+                  their major, and how those major pays in five years.
+                  We believe this study can best reflect the real reason behind
+                  gender salary gap. The reason is that through comparing
+                  major choice and how well ", strong("that major "), "pays, 
+                  we illiminate individual factors that create wage gap like
+                  how one perform in job and how he/she is willing to show up
+                  anytime his/her boss calls without prior notice.
+                  Thus, we can isolate the one variable we want to study: ",
+                   strong("INDIVIDUAL MAJOR CHOICE"), br(), br(),
+                   "Furthermore, the salary data we use is the median base
+                  salary after working in a position 5 years. ", strong(
+                      "It illiminates confunding variables like pregnancy leave
+                  and individual performance."))
             ),
             mainPanel(
-                plotlyOutput("female_perc_vs_major_pay")
+                plotlyOutput("female_perc_vs_major_pay"),
+                hr(),
+                plotlyOutput("male_perc_vs_major_pay")
             )
         )
     ),

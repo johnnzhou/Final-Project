@@ -101,7 +101,7 @@ server <- function(input, output) {
                     face = "bold"
                 )
             )+
-            theme(legend.position="bottom", legend.box = "horizontal")+
+            theme(legend.position = "bottom", legend.box = "horizontal")+
             theme(axis.text.x = element_text(angle = 90, hjust = 1))
         return(diff_plot_least)
     })
@@ -153,6 +153,36 @@ server <- function(input, output) {
         p
     })
     
+    output$male_perc_vs_major_pay <- renderPlotly({	
+        p <- plot_ly(	
+            x = perc_to_double(perc_range()$perc_male),	
+            y = perc_range()$median_pay,	
+            type = "scatter",	
+            mode = "markers",	
+            color = perc_range()$median_pay,	
+            size = perc_range()$median_pay,	
+            showlegend = F,	
+            text = paste("Major:", perc_range()$major,	
+                         "<br>Percentage of Male:",	
+                         perc_range()$perc_male,	
+                         "<br>Median Salary After 5 Years:",	
+                         perc_range()$median_pay),	
+            hoverinfo = "text"	
+            
+        ) %>%	
+            layout(title = "Major Male Percentage vs Major Median Pay",	
+                   xaxis =	
+                       list(title = "Percentage of Male in Majors"),	
+                   yaxis =	
+                       list(title = "Median Salary for Majors After 5 Years"))	
+        
+        if (trend_line()) {	
+            p <- add_lines(p, y = ~fitted(loess(	
+                perc_range()$median_pay ~	
+                    perc_to_double(perc_range()$perc_male))))	
+        }
+        p
+    })
     ############################ Matthew ############################    
    
     #this data frame shows the bottom 10 paid jobs and the gender percentage
