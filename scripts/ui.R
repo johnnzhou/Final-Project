@@ -1,79 +1,44 @@
-<<<<<<< HEAD
 # install.packages("shiny")
 # install.packages("tableHTML")
-=======
->>>>>>> 43da57216a2bb5548dd183e19d76174d718c1f05
 library("tableHTML")
 library(shiny)
 source("analysis.R")
 
-<<<<<<< HEAD
-=======
-# Define UI for application that draws a histogram
->>>>>>> 43da57216a2bb5548dd183e19d76174d718c1f05
 ui <- navbarPage(
     "Gender and Salary",
     
     # Overview
     tabPanel(
         "Overview",
-        tags$style(HTML("
-             @import url('https://fonts.googleapis.com/css?family=Oswald:500');
-            h2 {
-                        font-family: 'Oswald', sans-serif;
-                        font-weight: 500;
-                        line-height: 1.1;
-                        color: #393c42;
-            }
-            h3 {
-                        font-family: 'Oswald', sans-serif;
-                        font-weight: 500;
-                        line-height: 1.1;
-                        color: #393c42;
-            }
-            h6 {
-						font-family: 'Oswald', sans-serif;
-                        font-weight: 100;
-                        line-height: 1.1;
-                        color: #545859;
-                        text-align: left;
-            }
-                        
-        ")),
-        titlePanel("Exploring Salary Gap in Genders and Majors"),
-        img(src =
+        titlePanel("Overview: Gender, Major and Salary Gap"),
+        img(src = 
 "https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png"),
         h6("Copyright Recruiting Times"),
-        h3("Authors:"),
-        tags$li("Colson Xu"),
-        tags$li("Jason Li"),
+        h3("Author:"),
+        tags$li("Jason Li"), 
+        tags$li("Zhennan Zhou"), 
+        tags$li("Colson Xu"), 
         tags$li("Matthew Cho"),
-        tags$li("Zhennan Zhou"),
         h3("Project Description"),
-        p("Our group utilizes the data of enrollment of each major in universities from
-            Institute of Education Sciences gathered through surveys across
-            United States.", a(strong("National Center for Education Statistics"), href = "https://nces.ed.gov/programs/digest/") ,"allows us to gain access
-             for the data. ",
-          "We are using information about education across the United States starting from 2012 to current year. 
-          Specifically, we will be looking at data regarding genders, degree types, study areas."),
-        h3("Our goal:"),
+        p("Our group will use the statistics of enrollment of each major in universities. 
+            Institute of Education Sciences gathered these statistics through surveys across
+            United States. The website of National Center for Education Statistics allows us to gain access
+             for the data. ", "The", a(strong("datasets"), href = "https://nces.ed.gov/programs/digest/"),
+          "we are using includes education information starting from 2012 to current year. 
+          More specifically, we will be looking at statistics about genders, degree types, study areas, and ethnicities."),
+        p("This data set can be beneficial for many people to view. 
+          However, our target audience are females because they may feel discriminated due to their gender. 
+          They might believe that there are gender salary gaps. 
+          With the data that our team analyzes, we can compare different years of salaries for each college major. 
+          Then we will analyze major choices that males and females tend to make. 
+          Using this dataset, we can help our target audience discover the real reason behind gender salary gap."),
+        p("The audience of this project will,", em("hopefully"), "learn:"),
         tags$li("gender and salary gaps armong different majors,"), 
+        tags$li("the cause of gender gaps,"), 
         tags$li("gender difference in different majors,"), 
-        tags$li("salary gap between majors and genders"),
-        h3("Data"),
-        p("Understanding data is a key part in analyzing and organizing data.
-          As we're aware of the difficulty of sourcing data via API, we chose to use the", em(".csv"), "data downloaded from the",
-          a(strong("National Center for Education Statistics"), href="https://nces.ed.gov/"), "in this project."),
-        h3("Audience"),
-        p("While anybody can get some benefits from this report, 
-          our targeted audience for this project are those who care about the salary gap in different majors and genders;
-          college students who want to explore what majors they want to get in based on the salary; 
-          people who are concerned about gender inequality in the areas they are majoring in.
-        
-          With gender and salary gap becoming an increasingly important and highly-debated topic,
-          we expect there to be a lot of people looking for this kind of information. 
-          We hope their concerns are answered through various visualizations.
-          ")
+        tags$li("salary gap between majors and genders")
+
+
         
     ),
     
@@ -99,7 +64,6 @@ ui <- navbarPage(
             ),
             mainPanel(
                 plotOutput("diff_plot", height = "600px"),
-                hr(),
                 plotOutput("diff_plot_least", height = "600px")
                 # textOutput("text")
             )
@@ -114,27 +78,10 @@ ui <- navbarPage(
             sidebarPanel(
                 checkboxInput("trend", label = "Show Trend Line", value = F),
                 sliderInput("perc_select", label = "Select Percentage Range",
-                            min = 0, max = 1, value = c(0, 1)),
-                hr(),
-                h4("In this study, we compare how male and female choose
-                  their major, and how those major pays in five years.
-                  We believe this study can best reflect the real reason behind
-                  gender salary gap. The reason is that through comparing
-                  major choice and how well ", strong("that major "), "pays, 
-                  we illiminate individual factors that create wage gap like
-                  how one perform in job and how he/she is willing to show up
-                  anytime his/her boss calls without prior notice.
-                  Thus, we can isolate the one variable we want to study: ",
-                  strong("INDIVIDUAL MAJOR CHOICE"), br(), br(),
-                  "Furthermore, the salary data we use is the median base
-                  salary after working in a position 5 years. ", strong(
-                  "It illiminates confunding variables like pregnancy leave
-                  and individual performance."))
+                            min = 0, max = 1, value = c(0, 1))
             ),
             mainPanel(
-                plotlyOutput("female_perc_vs_major_pay"),
-                hr(),
-                plotlyOutput("male_perc_vs_major_pay")
+                plotlyOutput("female_perc_vs_major_pay")
             )
         )
     ),
@@ -164,7 +111,15 @@ ui <- navbarPage(
     # tab 5
     tabPanel(
         "About Us",
-        titlePanel("")
-        
+        "",
+        titlePanel(""),
+        sidebarLayout(
+            sidebarPanel(
+                
+            ),
+            mainPanel(
+                plotOutput("")
+            )
+        )
     )
 )
