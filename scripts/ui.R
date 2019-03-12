@@ -88,10 +88,10 @@ ui <- navbarPage(
     # tab4
     tabPanel(
         "Gender Difference in Jobs",
-        titlePanel("Gender Difference in Top 10 paid jobs vs Bottom 10 paid jobs"),
+        titlePanel("Gender Difference in Top 10 jobs vs Bottom 10 jobs"),
         sidebarLayout(
             sidebarPanel(
-                selectInput("work", label = h3("Top 10 vs Bottom 10 jobs"),
+                selectInput("work", label = h3("Top 10 vs Bottom 10"),
                             choices = list("Top" = 1, "Bottom" = 2))
             ),
             mainPanel(

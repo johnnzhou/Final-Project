@@ -156,8 +156,10 @@ server <- function(input, output) {
     ############################ Matthew ############################    
     least <- reactive({
         least <- jobs %>%
-            select(Occupation, Median.earnings.total, Percentage.of.women.in.occupational.group) %>%
-            rename(Occupation = Occupation, salary = Median.earnings.total, women = Percentage.of.women.in.occupational.group) %>%
+            select(Occupation, Median.earnings.total,
+                   Percentage.of.women.in.occupational.group) %>%
+            rename(Occupation = Occupation, salary = Median.earnings.total,
+                   women = Percentage.of.women.in.occupational.group) %>%
             mutate(men = 100 - women) %>%
             arrange(salary) %>%
             head(10) %>%
