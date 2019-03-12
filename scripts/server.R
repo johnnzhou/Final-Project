@@ -5,9 +5,9 @@ library(shiny)
 library(ggplot2)
 source("analysis.R")
 
-major_enrollment1 <- read.csv("../data/major_enrollment.csv", 
+major_enrollment1 <- read.csv("data/major_enrollment.csv", 
                              stringsAsFactors = FALSE)
-jobs <- read.csv("../data/job_salary_and_gender_percentage.csv",
+jobs <- read.csv("data/job_salary_and_gender_percentage.csv",
                  stringsAsFactors = FALSE)
 
 

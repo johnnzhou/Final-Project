@@ -11,9 +11,6 @@ shinyUI(navbarPage(
         "Overview",
         tags$style(HTML("
              @import url('https://fonts.googleapis.com/css?family=Oswald:500');
-            body {
-                background-color:#f9f9f9
-            }          
             h2 {
                         font-family: 'Oswald', sans-serif;
                         font-weight: 500;
