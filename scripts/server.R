@@ -11,7 +11,7 @@ jobs <- read.csv("data/job_salary_and_gender_percentage.csv",
                  stringsAsFactors = FALSE)
 
 
-server <- function(input, output) {
+shinyServer(function(input, output) {
     
     diff_data <- reactive({
         difference <- major_enrollment %>% 
@@ -203,3 +203,4 @@ server <- function(input, output) {
         }
     })
 }
+)
