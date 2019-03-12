@@ -11,7 +11,7 @@ library("plotly")
 
 ## John
 major_enrollment <-
-    read.csv("../data/major_enrollment.csv", stringsAsFactors = FALSE)
+    read.csv("data/major_enrollment.csv", stringsAsFactors = FALSE)
 
 major_enrollment$diff <- major_enrollment$male - major_enrollment$female
 major_enrollment <- major_enrollment %>% 
@@ -38,6 +38,4 @@ colnames(major_enrollment) <- c("major",
 major_list_top <- unlist(major_list_top, use.names = FALSE)
 major_list_least <- unlist(major_list_least, use.names = FALSE)
 
-
-overview <- my_data <- read.delim("../README.md")
                 
