@@ -149,7 +149,13 @@ server <- function(input, output) {
         }
         p
     })
+############################## jason ##############################
     
+    output$DATAFRAME_WANT_TO_USE <- reactive({
+      #DATA WRANGLING HAPPENS HERE
+      # REMEMBER TO RETURN THE DATAFRAME
+    })
     
-  
+    output$PLOT_WANT_TO_USE <- renderPlot()
+    
 }
