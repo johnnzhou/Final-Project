@@ -5,8 +5,8 @@ library(shiny)
 library(ggplot2)
 source("analysis.R")
 
-major_data <- read.csv("../data/major_enrollment.csv", stringsAsFactors = F)
-jobs <- read.csv("../data/job_salary_and_gender_percentage.csv",
+major_data <- read.csv("data/major_enrollment.csv", stringsAsFactors = F)
+jobs <- read.csv("data/job_salary_and_gender_percentage.csv",
                  stringsAsFactors = FALSE)
 
 
@@ -14,12 +14,14 @@ shinyServer(function(input, output) {
     
     diff_data <- reactive({
         difference <- major_enrollment %>% 
-                        arrange(-`Percentage of Male`) %>% 
-                        filter(major %in% input$major_list_top)
+            arrange(-`Percentage of Male`)
+        difference <- left_join(difference, best_25, by = "major")
+        filter(difference, major %in% input$major_list_top)
         difference <- melt(difference,
-                            id.vars = "major",
-                             variable.name = "type",
-                             value.name = "percentage")
+                           id.vars = c("major","median_pay"),
+                           variable.name = "type",
+                           value.name = "percentage")
+        difference <- drop_na(difference)
         return(difference)
     })
     
@@ -57,19 +59,49 @@ shinyServer(function(input, output) {
             theme(legend.position="bottom", legend.box = "horizontal") +
             theme(axis.text.x = element_text(angle = 90, hjust = 1))
         return(diff_plot)
+    
+    })
+    
+    output$trend_plot_male <- renderPlot({
+        if(input$male_trend)
+            trend <- ggplot(diff_data())+
+                geom_smooth(
+                    method="loess",
+                    mapping = aes(
+                        x = median_pay,
+                        y = percentage,
+                        fill = type,
+                        color = type
+                    ),
+                    span = 1,
+                    alpha = .2
+                ) + 
+                scale_color_brewer(palette="Set3")+
+                scale_fill_brewer(palette="Set3")+
+                labs(
+                    x = "Median Salary",
+                    y = "Percantage"
+                )+
+                theme(legend.position="bottom", legend.box = "horizontal")
+        else
+            trend <- 0
+        return(trend)
     })
     
     # second plot
     diff_data_least <- reactive({
-        difference_least <- major_enrollment %>% 
-            arrange(`Percentage of Female`) %>% 
-            filter(major %in% input$major_list_least)
-        difference_least <- melt(difference_least,
-                           id.vars = "major",
+        difference_female <- major_enrollment %>% 
+            arrange(-`Percentage of Female`)
+        difference_female <- left_join(difference_female, worst_25, by = "major")
+        filter(difference_female, major %in% input$major_list_top)
+        difference_female <- melt(difference_female,
+                           id.vars = c("major","median_pay"),
                            variable.name = "type",
                            value.name = "percentage")
-        return(difference_least)
+        difference_female <- drop_na(difference_female)
+        return(difference_female)
     })
+
     output$diff_plot_least <- renderPlot({
         diff_plot_least <- ggplot(diff_data_least()) +
             geom_bar(stat = "identity",
@@ -104,6 +136,32 @@ shinyServer(function(input, output) {
             theme(legend.position="bottom", legend.box = "horizontal")+
             theme(axis.text.x = element_text(angle = 90, hjust = 1))
         return(diff_plot_least)
+    })
+    
+    output$trend_plot_female <- renderPlot({
+        if(input$female_trend)
+            trend_female <- ggplot(diff_data_least())+
+                geom_smooth(
+                    method="loess",
+                    mapping = aes(
+                        x = median_pay,
+                        y = percentage,
+                        fill = type,
+                        color = type
+                    ),
+                    span = 1,
+                    alpha = .2
+                ) + 
+                scale_color_brewer(palette="Set2")+
+                scale_fill_brewer(palette="Set2")+
+                labs(
+                    x = "Median Salary",
+                    y = "Percantage"
+                )+
+                theme(legend.position="bottom", legend.box = "horizontal")
+        else
+            trend_female <- 0
+        return(trend_female)
     })
     
     ############################ Colson ############################
@@ -188,50 +246,50 @@ shinyServer(function(input, output) {
    
     #this data frame shows the bottom 10 paid jobs and the gender percentage
     #in those jobs
-     least <- reactive({
-        low <- jobs %>%
-            select(Occupation, Median.earnings.total,
-                   Percentage.of.women.in.occupational.group) %>%
-            rename(Occupation = Occupation, salary = Median.earnings.total,
-                   women = Percentage.of.women.in.occupational.group) %>%
-            mutate(men = 100 - women) %>%
-            arrange(salary) %>%
-            head(10) %>%
-            as.data.frame()
-        return(low)
-    })
-    
-    #this data frameshows the top 10 paid jobs and the gender percentage
-    #in those jobs
-    most <- reactive({
-        high <- jobs %>%
-            select(Occupation, Median.earnings.total,
-                   Percentage.of.women.in.occupational.group) %>%
-            rename(Occupation = Occupation, salary = Median.earnings.total, 
-                   women = Percentage.of.women.in.occupational.group) %>%
-            mutate(men = 100 - women) %>%
-            arrange(-salary) %>%
-            head(10) %>%
-            as.data.frame()
-        return(high)
-    })
-    
-    #creates a graph of the top 10 jobs and the bottom 10 jobs
-    output$job_plot <- renderPlot({
-        if (input$work == 1) {
-        job_plot <- ggplot(data = most()) +
-            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
-            labs(x = "Job Title", y = "Salary", title = "Top 10 paid jobs in U.S") +
-            theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
-                                                         hjust = 0.5))
-        }
-        else {
-        job_plot <- ggplot(data = least()) +
-            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
-            labs(x = "Job Title", y = "Salary", title = "Least 10 paid jobs in U.S") +
-            theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
-                                                         hjust = 0.5))
-        }
-    })
+    #  least <- reactive({
+    #     low <- jobs %>%
+    #         select(Occupation, Median.earnings.total,
+    #                Percentage.of.women.in.occupational.group) %>%
+    #         rename(Occupation = Occupation, salary = Median.earnings.total,
+    #                women = Percentage.of.women.in.occupational.group) %>%
+    #         mutate(men = 100 - women) %>%
+    #         arrange(salary) %>%
+    #         head(10) %>%
+    #         as.data.frame()
+    #     return(low)
+    # })
+    # 
+    # #this data frameshows the top 10 paid jobs and the gender percentage
+    # #in those jobs
+    # most <- reactive({
+    #     high <- jobs %>%
+    #         select(Occupation, Median.earnings.total,
+    #                Percentage.of.women.in.occupational.group) %>%
+    #         rename(Occupation = Occupation, salary = Median.earnings.total, 
+    #                women = Percentage.of.women.in.occupational.group) %>%
+    #         mutate(men = 100 - women) %>%
+    #         arrange(-salary) %>%
+    #         head(10) %>%
+    #         as.data.frame()
+    #     return(high)
+    # })
+    # 
+    # #creates a graph of the top 10 jobs and the bottom 10 jobs
+    # output$job_plot <- renderPlot({
+    #     if (input$work == 1) {
+    #     job_plot <- ggplot(data = most()) +
+    #         geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
+    #         labs(x = "Job Title", y = "Salary", title = "Top 10 paid jobs in U.S") +
+    #         theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
+    #                                                      hjust = 0.5))
+    #     }
+    #     else {
+    #     job_plot <- ggplot(data = least()) +
+    #         geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
+    #         labs(x = "Job Title", y = "Salary", title = "Least 10 paid jobs in U.S") +
+    #         theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
+    #                                                      hjust = 0.5))
+    #     }
+    # })
 }
 )
