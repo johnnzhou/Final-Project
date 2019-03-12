@@ -90,15 +90,18 @@ ui <- navbarPage(
         )
     ),
     
-    # tab4
+    # This tab shows the top 10 jobs and the bottom 10 jobs and the 
+    # gender difference in those jobs
     tabPanel(
-        "Tab 4",
-        titlePanel(""),
+        "Gender Difference in Jobs",
+        titlePanel("Gender Difference in Top 10 jobs vs Bottom 10 jobs"),
         sidebarLayout(
             sidebarPanel(
+                selectInput("work", label = h3("Top 10 vs Bottom 10"),
+                            choices = list("Top" = 1, "Bottom" = 2))
             ),
             mainPanel(
-                
+                plotOutput("job_plot")
             )
         )
     ),

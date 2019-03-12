@@ -2,10 +2,13 @@ library(shiny)
 library(dplyr)
 library(plotly)
 library(shiny)
+library(ggplot2)
 source("analysis.R")
 
 major_enrollment1 <- read.csv("../data/major_enrollment.csv", 
                              stringsAsFactors = FALSE)
+jobs <- read.csv("../data/job_salary_and_gender_percentage.csv",
+                 stringsAsFactors = FALSE)
 
 
 server <- function(input, output) {
@@ -150,6 +153,53 @@ server <- function(input, output) {
         p
     })
     
+    ############################ Matthew ############################    
+   
+    #this data frame shows the bottom 10 paid jobs and the gender percentage
+    #in those jobs
+     least <- reactive({
+        low <- jobs %>%
+            select(Occupation, Median.earnings.total,
+                   Percentage.of.women.in.occupational.group) %>%
+            rename(Occupation = Occupation, salary = Median.earnings.total,
+                   women = Percentage.of.women.in.occupational.group) %>%
+            mutate(men = 100 - women) %>%
+            arrange(salary) %>%
+            head(10) %>%
+            as.data.frame()
+        return(low)
+    })
     
-  
+    #this data frameshows the top 10 paid jobs and the gender percentage
+    #in those jobs
+    most <- reactive({
+        high <- jobs %>%
+            select(Occupation, Median.earnings.total,
+                   Percentage.of.women.in.occupational.group) %>%
+            rename(Occupation = Occupation, salary = Median.earnings.total, 
+                   women = Percentage.of.women.in.occupational.group) %>%
+            mutate(men = 100 - women) %>%
+            arrange(-salary) %>%
+            head(10) %>%
+            as.data.frame()
+        return(high)
+    })
+    
+    #creates a graph of the top 10 jobs and the bottom 10 jobs
+    output$job_plot <- renderPlot({
+        if (input$work == 1) {
+        job_plot <- ggplot(data = most()) +
+            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
+            labs(x = "Job Title", y = "Salary", title = "Top 10 paid jobs in U.S") +
+            theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
+                                                         hjust = 0.5))
+        }
+        else {
+        job_plot <- ggplot(data = least()) +
+            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
+            labs(x = "Job Title", y = "Salary", title = "Least 10 paid jobs in U.S") +
+            theme_bw() + theme(plot.title = element_text(size = 20, face = "bold",
+                                                         hjust = 0.5))
+        }
+    })
 }
