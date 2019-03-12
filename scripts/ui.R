@@ -89,14 +89,14 @@ ui <- navbarPage(
     # gender difference in those jobs
     tabPanel(
         "Gender Difference in Jobs",
-        titlePanel("Gender Difference in Top 10 jobs vs Bottom 10 jobs"),
+        titlePanel("Top 10 vs Bottom 10 jobs"),
         sidebarLayout(
             sidebarPanel(
-                selectInput("work", label = h3("Top 10 vs Bottom 10"),
+                selectInput("work", label = h3("Top vs Bottom"),
                             choices = list("Top" = 1, "Bottom" = 2))
             ),
             mainPanel(
-                plotOutput("job_plot", width = "900px")
+                plotOutput("job_plot", width = "900px", height = "600px")
             )
         )
     ),
