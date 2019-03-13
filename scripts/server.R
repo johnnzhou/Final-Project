@@ -16,12 +16,13 @@ shinyServer(function(input, output) {
         difference <- major_enrollment %>% 
             arrange(-`Percentage of Male`)
         difference <- left_join(difference, best_25, by = "major")
-        filter(difference, major %in% input$major_list_top)
         difference <- melt(difference,
                            id.vars = c("major","median_pay"),
                            variable.name = "type",
                            value.name = "percentage")
         difference <- drop_na(difference)
+        
+        difference <- filter(difference, major %in% input$major_list_top)
         return(difference)
     })
     
@@ -45,7 +46,7 @@ shinyServer(function(input, output) {
             scale_fill_brewer(palette = "Set3") +
             labs(
                 title = "Male Dominant Majors",
-                x = "",
+                x = "Major",
                 y = "Number of people in the major by gender",
                 fill = ""
             ) +
@@ -93,12 +94,16 @@ shinyServer(function(input, output) {
         difference_female <- major_enrollment %>% 
             arrange(-`Percentage of Female`)
         difference_female <- left_join(difference_female, worst_25, by = "major")
-        filter(difference_female, major %in% input$major_list_top)
+        difference_female <- filter(difference_female, 
+                                    major %in% input$major_list_least)
+                             
+                             
         difference_female <- melt(difference_female,
                            id.vars = c("major","median_pay"),
                            variable.name = "type",
                            value.name = "percentage")
         difference_female <- drop_na(difference_female)
+                                
         return(difference_female)
     })
 
@@ -108,21 +113,20 @@ shinyServer(function(input, output) {
                      mapping = aes(
                          x = major,
                          y = percentage,
-                         fill = type,
-                         width=0.8
+                         fill = factor(type, levels = c("Percentage of Female","Percentage of Male"))
                      )
             ) +
             geom_text(aes(x = major,
                           y = percentage,
-                          label = paste0(round(percentage),"%")), 
-                      vjust=-0.9, 
-                      color="black",
+                          label = paste0(round(percentage),"%")),
+                      vjust=1.6, 
+                      color = "black",
                       size = 3
             ) +
             scale_fill_brewer(palette = "Set2") +
             labs(
                 title = "Female Dominant Majors",
-                x = "",
+                x = "Major",
                 y = "Number of people in the major by gender",
                 fill = ""
             ) +
