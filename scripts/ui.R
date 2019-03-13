@@ -2,7 +2,6 @@ library("tableHTML")
 library(shiny)
 source("analysis.R")
 
-# Define UI for application that draws a histogram
 shinyUI(navbarPage(
     "Gender and Salary",
     
@@ -101,8 +100,6 @@ shinyUI(navbarPage(
                 hr(),
                 plotOutput("diff_plot_least", height = "600px"),
                 plotOutput("trend_plot_female", height = "300px")
-                # textOutput("text")
-                
             )
         )
     ),
