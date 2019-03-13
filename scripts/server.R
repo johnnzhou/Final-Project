@@ -23,6 +23,7 @@ server <- function(input, output) {
                              value.name = "percentage")
         return(difference)
     })
+    
     output$diff_plot <- renderPlot({
         diff_plot <- ggplot(diff_data()) +
             geom_bar(stat = "identity",
@@ -30,14 +31,14 @@ server <- function(input, output) {
                          x = major,
                          y = percentage,
                          fill = type,
-                         width=0.8
+                         width = 0.8
                      )
             )+
             geom_text(aes(x = major,
                           y = percentage,
-                          label = paste0(round(percentage),"%")), 
-                          vjust=1.6, 
-                          color="black",
+                          label = paste0(round(percentage), "%")), 
+                          vjust = 1.6, 
+                          color = "black",
                           size = 3
                           )+
             scale_fill_brewer(palette = "Set3")+
