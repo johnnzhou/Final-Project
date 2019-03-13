@@ -62,7 +62,6 @@ ui <- navbarPage(
             mainPanel(
                 plotOutput("diff_plot", height = "600px"),
                 plotOutput("diff_plot_least", height = "600px")
-                # textOutput("text")
             )
         )
     ),
