@@ -3,9 +3,14 @@ library(dplyr)
 library(plotly)
 library(shiny)
 library(ggplot2)
+library(ggrepel)
+
+
 source("analysis.R")
 
 major_data <- read.csv("data/major_enrollment.csv", stringsAsFactors = F)
+major_enrollment1 <- read.csv("data/major_enrollment.csv", 
+                              stringsAsFactors = FALSE)
 
 jobs <- read.csv("data/job_salary_and_gender_percentage.csv",
                  stringsAsFactors = FALSE)
@@ -84,6 +89,7 @@ server <- function(input, output) {
                     x = "Median Salary",
                     y = "Percantage"
                 )+
+                geom_label_repel(aes(x = median_pay,y = percentage, label=major), size=3, alpha=0.75)+
                 theme(legend.position="bottom", legend.box = "horizontal")
         else
             trend <- 0
@@ -163,6 +169,7 @@ server <- function(input, output) {
                     x = "Median Salary",
                     y = "Percantage"
                 )+
+                geom_label_repel(aes(x = median_pay,y = percentage, label=major), size=3, alpha=0.75)+
                 theme(legend.position="bottom", legend.box = "horizontal")
         else
             trend_female <- 0

@@ -6,6 +6,29 @@ shinyUI(navbarPage(
     "Gender and Salary",
     tabPanel(
         "Overview",
+        tags$style(HTML("
+             @import url('https://fonts.googleapis.com/css?family=Oswald:500');
+                        h2 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 500;
+                        line-height: 1.1;
+                        color: #393c42;
+                        }
+                        h3 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 500;
+                        line-height: 1.1;
+                        color: #393c42;
+                        }
+                        h6 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 100;
+                        line-height: 1.1;
+                        color: #545859;
+                        text-align: left;
+                        }
+                        
+                        ")),
         titlePanel("Overview: Gender, Major and Salary Gap"),
         img(src = 
 "https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png"),
@@ -42,11 +65,23 @@ shinyUI(navbarPage(
     tabPanel(
         "Gender Difference in Majors",
         titlePanel("Gender Difference in Majors"),
+        p("The bar graph below uses the data from National Center for Education Statistics, 
+          which demonstrate the percentage difference of males and females in different majors. 
+          Specifically, the two  bar plots compare the number of male students and female students top-20 male dominant and female dominant majors.  
+          The datasets can be chosen with", strong("different checkboxes"),"that categorize different majors."),
+        p("The", strong("Show trend"), "checkbox is used to show the percentage of male and female in the different salary levels, 
+          which illustrates the general trend between the percentage of male/female and the median salary."),
+        p("We have concluded from this chart and analysis that across the country, 
+          females tend to have less salary than males on average. 
+          The percentage of female working in the industry decreases as the median salary increases. 
+          Even in the Female Dominant Majors, less females work in the industry than males do as the average salary increases. 
+          In highly-paid industries, such as Computer Science and Electrical Engineering, the percentage of males outnumber the percentage of female."),
+        hr(),
         sidebarLayout(
             sidebarPanel(
                 tags$style(make_css(list(".well", 'width', "310px"))),
                 tags$style(make_css(list(".col-sm-4", 'width', "350px"))),
-                tags$style(make_css(list("#major_list_top", "height", "900px"))),
+                tags$style(make_css(list("#major_list_top", "height", "1000px"))),
                 tags$style(make_css(list("#diff_plot_least", "margin-top", "30px"))),
                 tags$style(make_css(list(".col-sm-8", "width", "70%"))),
                 checkboxInput("male_trend",
@@ -66,10 +101,10 @@ shinyUI(navbarPage(
             ),
             mainPanel(
                 plotOutput("diff_plot", height = "600px"),
-                plotOutput("trend_plot_male", height = "300px"),
+                plotOutput("trend_plot_male", height = "450px"),
                 hr(),
                 plotOutput("diff_plot_least", height = "600px"),
-                plotOutput("trend_plot_female", height = "300px")
+                plotOutput("trend_plot_female", height = "450px")
             )
         )
     ),
