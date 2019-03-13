@@ -197,6 +197,15 @@ server <- function(input, output) {
             arrange(salary) %>%
             head(10) %>%
             as.data.frame()
+        low$Occupation[1] <- "Attendants"
+        low$Occupation[3] <- "Food Workers"
+        low$Occupation[4] <- "Service Workers"
+        low$Occupation[6] <- "Agricultural Workers"
+        low$Occupation[7] <- "Cafeteria Attendants"
+        low$Occupation[8] <- "Clothing Workers"
+        low$Occupation[10] <- "Housekeeping Cleaners"
+        
+        
         return(low)
     })
     
@@ -212,6 +221,9 @@ server <- function(input, output) {
             arrange(-salary) %>%
             head(10) %>%
             as.data.frame()
+        high$Occupation[1] <- "Surgeons"
+        high$Occupation[4] <- "Engineering Managers"
+        
         return(high)
     })
     
@@ -225,12 +237,11 @@ server <- function(input, output) {
         title <- "Least 10 paid jobs in U.S"
         }
         ggplot(data = data_f) +
-            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary,
-                                                      fill = Occupation)) +
+            geom_bar(stat = "identity", mapping = aes(x = Occupation, y = salary)) +
             labs(x = "Job Title", y = "Salary", title = title) +
             theme_bw() + theme(plot.title = element_text(size = 30, face = "bold",
                                                          hjust = 0.5)) +
-            theme(axis.text.x = element_text(angle = 90, hjust = 0.5)) +
+            theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
             theme(text = element_text(size = 15))
     })
 }
