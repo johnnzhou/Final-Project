@@ -14,18 +14,6 @@ major_enrollment <- major_enrollment %>%
                             perc_male = (male / total) * 100,
                             perc_female = (female / total) * 100) %>% 
                     select(major, perc_male, perc_female, diff)
-<<<<<<< HEAD
-=======
-major_list_top <- major_enrollment %>% 
-    arrange(-diff) %>%
-    select(major) %>%
-    head(20)
-
-major_list_least <- major_enrollment %>% 
-    arrange(diff) %>%
-    select(major) %>% 
-    head(20)
->>>>>>> master
 
 major_enrollment <- major_enrollment[-4]
 colnames(major_enrollment) <- c("major", 
