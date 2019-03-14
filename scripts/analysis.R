@@ -5,12 +5,12 @@ library(ggplot2)
 library(plotly)
 
 ############################# Colson #############################
-perc_to_double <- function(x) {	
-    as.numeric(gsub("%", "", x)) / 100	
-}	
+perc_to_double <- function(x) {
+    as.numeric(gsub("%", "", x)) / 100
+}
 
-double_to_perc <- function(x) {	
-    paste0(round(x, 4) * 100, "%")	
+double_to_perc <- function(x) {
+    paste0(round(x, 4) * 100, "%")
 }
 
 ############################# John #############################

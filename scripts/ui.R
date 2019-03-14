@@ -1,9 +1,11 @@
 library(tableHTML)
 library(shiny)
 library(lintr)
+library(shinythemes)
 source("analysis.R")
 
 ui <- navbarPage(
+    theme = shinytheme("yeti"),
     "Gender Gap",
     tabPanel(
         "Overview",
@@ -151,7 +153,7 @@ ui <- navbarPage(
             )
         )
     ),
-    
+
     # This tab shows the top 10 jobs and the bottom 10 jobs and the
     # gender difference in those jobs
     tabPanel(
