@@ -7,26 +7,27 @@ shinyUI(navbarPage(
   tabPanel(
     "Overview",
     tags$style(HTML("
-         @import url('https://fonts.googleapis.com/css?family=Oswald:500');
-                h2 {
-                    font-family: 'Oswald', sans-serif;
-                    font-weight: 500;
-                    line-height: 1.1;
-                    color: #393c42;
-                }
-                h3 {
-                    font-family: 'Oswald', sans-serif;
-                    font-weight: 500;
-                    line-height: 1.1;
-                    color: #393c42;
-                }
-                h6 {
-                    font-family: 'Oswald', sans-serif;
-                    font-weight: 100;
-                    line-height: 1.1;
-                    color: #545859;
-                    text-align: left;
-                }")),
+             @import url('https://fonts.googleapis.com/css?family=Oswald:500');
+                        h2 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 500;
+                        line-height: 1.1;
+                        color: #393c42;
+                        }
+                        h3 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 500;
+                        line-height: 1.1;
+                        color: #393c42;
+                        }
+                        h6 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 100;
+                        line-height: 1.1;
+                        color: #545859;
+                        text-align: left;
+                        }
+                ")),
     titlePanel("Overview: Gender, Major and Salary Gap"),
     h6("Copyright Recruiting Times"),
     h3("Author:"),
@@ -126,10 +127,10 @@ shinyUI(navbarPage(
         )
       ),
       mainPanel(
-        plotlyOutput("diff_plot_top", height = "600px"),
+        plotOutput("diff_plot", height = "600px"),
         plotOutput("trend_plot_male", height = "450px"),
         hr(),
-        plotlyOutput("diff_plot_least", height = "600px"),
+        plotOutput("diff_plot_least", height = "600px"),
         plotOutput("trend_plot_female", height = "450px")
       )
     )
@@ -163,7 +164,14 @@ shinyUI(navbarPage(
           label = "Select Percentage Range",
           min = 0, max = 1, value = c(0, 1)
         )
-    ),
+      ),
+      mainPanel(
+        plotlyOutput("female_perc_vs_major_pay"),
+        hr(),
+        plotlyOutput("male_perc_vs_major_pay")
+      )
+    )
+  ),
 
   # This tab shows the top 10 jobs and the bottom 10 jobs and the
   # gender difference in those jobs

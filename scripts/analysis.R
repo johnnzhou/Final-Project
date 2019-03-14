@@ -17,8 +17,8 @@ major_enrollment$diff <- major_enrollment$male - major_enrollment$female
 major_enrollment <- major_enrollment %>%
   mutate(
     total = male + female,
-    perc_male = (male / total),
-    perc_female = (female / total)
+    perc_male = (male / total) * 100,
+    perc_female = (female / total) * 100
   ) %>%
   select(major, perc_male, perc_female, diff)
 
