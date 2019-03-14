@@ -61,7 +61,6 @@ lower_perc$Occupation[10] <- "Housekeeping Cleaners"
 higher_perc <- jobs_filter %>%
   arrange(-salary) %>%
   head(10)
-
 higher_perc$Occupation[1] <- "Surgeons"
 higher_perc$Occupation[4] <- "Engineering Managers"
 

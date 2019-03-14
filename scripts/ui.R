@@ -118,8 +118,8 @@ ui <- navbarPage(
       ),
       mainPanel(
         plotOutput("job_plot", width = "900px", height = "600px"),
-        plotOutput("lowest_plot"),
-        plotOutput("highest_plot")
+        plotOutput("lowest_plot",width = "900px", height = "600px"),
+        plotOutput("highest_plot",width = "900px", height = "600px")
       )
     )
   ),

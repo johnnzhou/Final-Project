@@ -276,10 +276,23 @@ server <- function(input, output) {
                  label = gender
                )
       ) + coord_polar("y", start = 0) +
-      scale_fill_brewer(palette = "Set3")+
+      scale_fill_brewer(palette = "Set2")+
+      geom_text(aes(x = Occupation,
+                    y = percentage,
+                    label = paste0(percentage, "%")), 
+                vjust = 1,
+                hjust = -3,
+                color = "black",
+                size = 3
+      )+
       labs(
-        title = "Lowest Salary Occupation Gender "
-      ) + blank_theme
+        title = "Lowest Salary Occupation Gender ") + 
+      blank_theme +
+      theme(plot.title = element_text(hjust = 0.5), 
+            axis.text=element_text(size=15),
+            axis.title=element_text(size=20,face="bold"),
+            axis.text.x=element_blank())
+ 
     return(lowest_plot)
     
   })
@@ -306,9 +319,21 @@ server <- function(input, output) {
                )
       ) + coord_polar("y", start = 0) +
       scale_fill_brewer(palette = "Set3")+
+      geom_text(aes(x = Occupation,
+                    y = percentage,
+                    label = paste0(percentage, "%")), 
+                vjust = 1,
+                hjust = -3,
+                color = "black",
+                size = 3
+      ) +
       labs(
-        title = "Highest Salary Occupation Gender "
-      ) + blank_theme
+        title = "Highest Salary Occupation Gender ") + 
+      blank_theme + 
+      theme(plot.title = element_text(hjust = 0.5), 
+      axis.text=element_text(size=15),
+      axis.title=element_text(size=20,face="bold"),
+      axis.text.x=element_blank())
     return(highest_plot)
     
   })
