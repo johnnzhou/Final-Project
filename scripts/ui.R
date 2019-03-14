@@ -107,10 +107,19 @@ ui <- navbarPage(
         sidebarLayout(
             sidebarPanel(
                 selectInput("work", label = h3("Top vs Bottom"),
-                            choices = list("Top" = 1, "Bottom" = 2))
+                            choices = list("Top" = 1, "Bottom" = 2)),
+                      radioButtons("lower_perc",
+                                   "Lower Salary Occupations",
+                                   choices = lower_perc),
+                      radioButtons("higher_perc",
+                                   "Higher Salary Occupations",
+                                   choices = higher_perc)
+                
             ),
             mainPanel(
-                plotOutput("job_plot", width = "900px", height = "600px")
+                plotOutput("job_plot", width = "900px", height = "600px"),
+                plotOutput("lowest_plot"),
+                plotOutput("highest_plot")
             )
         )
     ),

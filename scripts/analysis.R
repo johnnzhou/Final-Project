@@ -34,5 +34,36 @@ major_list_top <- unlist(major_list_top, use.names = FALSE)
 major_list_least <- unlist(major_list_least, use.names = FALSE)
 
 
-overview <- my_data <- read.delim("../README.md")
-                
+
+
+##################Jason#####################
+jobs_filter <- jobs %>%
+  select(Occupation, Median.earnings.total,
+        Percentage.of.women.in.occupational.group) %>%
+  rename(Occupation = Occupation, salary = Median.earnings.total,
+         women = Percentage.of.women.in.occupational.group) %>%
+  mutate(men = 100 - women)
+
+lower_perc <- jobs %>%
+  select(Occupation, Median.earnings.total,
+         Percentage.of.women.in.occupational.group) %>%
+  rename(Occupation = Occupation, salary = Median.earnings.total,
+         women = Percentage.of.women.in.occupational.group) %>%
+  mutate(men = 100 - women) %>%
+  arrange(salary) %>%
+  head(10) %>%
+  select(Occupation)
+
+higher_perc <- jobs %>%
+  select(Occupation, Median.earnings.total,
+         Percentage.of.women.in.occupational.group) %>%
+  rename(Occupation = Occupation, salary = Median.earnings.total, 
+         women = Percentage.of.women.in.occupational.group) %>%
+  mutate(men = 100 - women) %>%
+  arrange(-salary) %>%
+  head(10) %>%
+  select(Occupation)
+
+higher_perc <- unlist(higher_perc, use.names = FALSE)
+lower_perc <- unlist(lower_perc, use.names = FALSE)
+

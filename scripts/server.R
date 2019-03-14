@@ -230,8 +230,8 @@ server <- function(input, output) {
     
     #creates a graph of the top 10 jobs and the bottom 10 jobs
     output$job_plot <- renderPlot({
-        if (input$work == 1) {
-        data_f <- most()
+         if (input$work == 1) {
+         data_f <- most()
         title <- "Top 10 paid jobs in U.S"
         } else {
         data_f <- least()
@@ -245,4 +245,63 @@ server <- function(input, output) {
             theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
             theme(text = element_text(size = 15))
     })
+    ############################ Jason #################################
+    diff_1 <- reactive({
+      difference_1 <- jobs_filter %>%
+        arrange(`salary`) %>% 
+        select(Occupation, women, men)%>%
+        filter(Occupation %in% input$lower_perc)
+      difference_1 <- melt(difference_1,
+                           id.vars = "Occupation",
+                           variable.name = "gender",
+                           value.name = "percentage")
+      return(difference_1)
+    })
+
+    output$lowest_plot <- renderPlot({
+      lowest_plot <- ggplot(diff_1()) +
+        geom_bar(stat = "identity",
+                 mapping = aes(
+                   x = Occupation,
+                   y = percentage,
+                   fill = gender,
+                 )
+        ) + coord_polar("y", start = 0) +
+        labs(
+          title = "Lowest Salary Occupation Gender"
+        )
+      return(lowest_plot)
+        
+    })
+    
+    # Higher Pay Occupation
+    diff_2 <- reactive({
+      difference_2 <- jobs_filter %>%
+        arrange(-`salary`) %>% 
+        select(Occupation, women, men)%>%
+        filter(Occupation %in% input$higher_perc)
+      difference_2 <- melt(difference_2,
+                           id.vars = "Occupation",
+                           variable.name = "gender",
+                           value.name = "percentage")
+      return(difference_2)
+    })
+    
+    output$highest_plot <- renderPlot({
+      lowest_plot <- ggplot(diff_2()) +
+        geom_bar(stat = "identity",
+                 mapping = aes(
+                   x = Occupation,
+                   y = percentage,
+                   fill = gender,
+                   label = gender
+                 )
+        ) + coord_polar("y", start = 0) +
+        labs(
+          title = "Highest Salary Occupation Gender "
+        )
+      return(lowest_plot)
+      
+    })
+
 }
