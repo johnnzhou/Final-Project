@@ -7,6 +7,11 @@ library("plotly")
 ## John
 major_enrollment <-
     read.csv("data/major_enrollment.csv", stringsAsFactors = FALSE)
+best_25 <- read.csv("data/best_25.csv", stringsAsFactors = FALSE)
+colnames(best_25) <- c("major", "median_pay")
+
+worst_25 <- read.csv("data/worst_25.csv", stringsAsFactors = FALSE)
+colnames(worst_25) <- c("major", "median_pay")
 
 major_enrollment$diff <- major_enrollment$male - major_enrollment$female
 major_enrollment <- major_enrollment %>% 
@@ -47,14 +52,6 @@ major_list_least <- drop_na(major_list_least) %>%
                     head(20)
 major_list_least <- unlist(major_list_least, use.names = FALSE)
 
-
-
-
-best_25 <- read.csv("data/best_25.csv", stringsAsFactors = FALSE)
-colnames(best_25) <- c("major", "median_pay")
-
-worst_25 <- read.csv("data/worst_25.csv", stringsAsFactors = FALSE)
-colnames(worst_25) <- c("major", "median_pay")
 
 
 

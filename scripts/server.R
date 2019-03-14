@@ -89,7 +89,7 @@ server <- function(input, output) {
                     x = "Median Salary",
                     y = "Percantage"
                 )+
-                geom_label_repel(aes(x = median_pay,y = percentage, label=major), size=3, alpha=0.75)+
+                geom_text_repel(aes(x = median_pay,y = percentage, label=major), size=3, alpha=0.75)+
                 theme(legend.position="bottom", legend.box = "horizontal")
         else
             trend <- 0
@@ -121,14 +121,18 @@ server <- function(input, output) {
                          x = major,
                          y = percentage,
                          fill = factor(type, levels = c("Percentage of Female","Percentage of Male"))
-                     )
+                     ),
+                     position = "dodge"
             )+
-            geom_text(aes(x = major,
+            geom_label_repel(aes(x = major,
                           y = percentage,
                           label = paste0(round(percentage),"%")),
-                      vjust = 1.6, 
+                      vjust = 3, 
                       color = "black",
-                      size = 3
+                      size = 3,
+                      nudge_x = -0.2,
+                      nudge_y = 1,
+                      force = 10
             )+
             scale_fill_brewer(palette = "Set2")+
             labs(
