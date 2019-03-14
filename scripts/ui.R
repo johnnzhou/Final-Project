@@ -52,9 +52,9 @@ Sciences through surveys across United States. One can find more information
     ),
     p("There are a lot of factors when considering the gender salary gap.
 It is nearly impossible to consider all the factors that contributes to the
-gender salary gap, however our team chose the most valuable factors when 
-considering gender gap salary from our datas. Our project will foucs on 
-audiences who believe there is still a huge difference in gender salary 
+gender salary gap, however our team chose the most valuable factors when
+considering gender gap salary from our datas. Our project will foucs on
+audiences who believe there is still a huge difference in gender salary
 gap and with this project, we hope to have changed their mind by the end."),
     p("The three", em("charts"), " of this project will represent:"),
     tags$li("Gender Difference among Majors"),
