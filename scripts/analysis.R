@@ -6,29 +6,31 @@ library("plotly")
 
 ## John
 major_enrollment <-
-    read.csv("../data/major_enrollment.csv", stringsAsFactors = FALSE)
+  read.csv("../data/major_enrollment.csv", stringsAsFactors = FALSE)
+jobs <- read.csv("../data/job_salary_and_gender_percentage.csv",
+                 stringsAsFactors = FALSE)
 
 major_enrollment$diff <- major_enrollment$male - major_enrollment$female
 major_enrollment <- major_enrollment %>% 
-                    mutate(total = male + female,
-                            perc_male = (male / total) * 100,
-                            perc_female = (female / total) * 100) %>% 
-                    select(major, perc_male, perc_female, diff)
+  mutate(total = male + female,
+         perc_male = (male / total) * 100,
+         perc_female = (female / total) * 100) %>% 
+  select(major, perc_male, perc_female, diff)
 major_list_top <- major_enrollment %>% 
-    arrange(-diff) %>%
-    select(major) %>%
-    head(20)
+  arrange(-diff) %>%
+  select(major) %>%
+  head(20)
 
 major_list_least <- major_enrollment %>% 
-    arrange(diff) %>%
-    select(major) %>% 
-    head(20)
+  arrange(diff) %>%
+  select(major) %>% 
+  head(20)
 
 major_enrollment <- major_enrollment[-4]
 colnames(major_enrollment) <- c("major", 
-                          "Percentage of Male", 
-                          "Percentage of Female"
-                          )
+                                "Percentage of Male", 
+                                "Percentage of Female"
+)
 
 major_list_top <- unlist(major_list_top, use.names = FALSE)
 major_list_least <- unlist(major_list_least, use.names = FALSE)
@@ -39,31 +41,27 @@ major_list_least <- unlist(major_list_least, use.names = FALSE)
 ##################Jason#####################
 jobs_filter <- jobs %>%
   select(Occupation, Median.earnings.total,
-        Percentage.of.women.in.occupational.group) %>%
+         Percentage.of.women.in.occupational.group) %>%
   rename(Occupation = Occupation, salary = Median.earnings.total,
          women = Percentage.of.women.in.occupational.group) %>%
   mutate(men = 100 - women)
 
-lower_perc <- jobs %>%
-  select(Occupation, Median.earnings.total,
-         Percentage.of.women.in.occupational.group) %>%
-  rename(Occupation = Occupation, salary = Median.earnings.total,
-         women = Percentage.of.women.in.occupational.group) %>%
-  mutate(men = 100 - women) %>%
+lower_perc <- jobs_filter %>%
   arrange(salary) %>%
-  head(10) %>%
-  select(Occupation)
+  head(10)
+lower_perc$Occupation[1] <- "Attendants"
+lower_perc$Occupation[3] <- "Food Workers"
+lower_perc$Occupation[4] <- "Service Workers"
+lower_perc$Occupation[6] <- "Agricultural Workers"
+lower_perc$Occupation[7] <- "Cafeteria Attendants"
+lower_perc$Occupation[8] <- "Clothing Workers"
+lower_perc$Occupation[10] <- "Housekeeping Cleaners"
 
-higher_perc <- jobs %>%
-  select(Occupation, Median.earnings.total,
-         Percentage.of.women.in.occupational.group) %>%
-  rename(Occupation = Occupation, salary = Median.earnings.total, 
-         women = Percentage.of.women.in.occupational.group) %>%
-  mutate(men = 100 - women) %>%
+
+higher_perc <- jobs_filter %>%
   arrange(-salary) %>%
-  head(10) %>%
-  select(Occupation)
+  head(10)
 
-higher_perc <- unlist(higher_perc, use.names = FALSE)
-lower_perc <- unlist(lower_perc, use.names = FALSE)
+higher_perc$Occupation[1] <- "Surgeons"
+higher_perc$Occupation[4] <- "Engineering Managers"
 
