@@ -1,9 +1,10 @@
 library(tableHTML)
 library(shiny)
+library(lintr)
 source("analysis.R")
 
 shinyUI(navbarPage(
-  "Gender and Salary",
+  "Gender Gap",
   tabPanel(
     "Overview",
     tags$style(HTML("
@@ -28,44 +29,43 @@ shinyUI(navbarPage(
                         text-align: left;
                         }
                 ")),
-    titlePanel("Overview: Gender, Major and Salary Gap"),
+    titlePanel("Gender Gap Statistics in the U.S"),
     h6("Copyright Recruiting Times"),
-    h3("Author:"),
-    tags$li("Jason Li"),
-    tags$li("Zhennan Zhou"),
-    tags$li("Colson Xu"),
-    tags$li("Matthew Cho"),
-    h3("Project Description"),
+    h3("Purpose of the project"),
     p(
-      "Our group will use the statistics of enrollment
-        of each major in universities.
-        Institute of Education Sciences gathered these statistics
-        through surveys across United States.
-        The website of National Center for Education Statistics
-        allows us to gain access for the data. ",
-      "The", a(strong("datasets"),
+      "Ever heard of the term Gender Gap? It is commonly known as the
+gender pay gap, which is the difference in the average salary earned between
+men and women. Even though today's society is moving towards gender equality,
+people still believe that there is a massive difference in salary among men
+and women. However, in reality there really isn't that big of a gender pay gap
+in our society. This project will support the statement that there isn't
+a salary discrimation among women compared to men."),
+
+p("To support our statment, our group will use the statistics of enrollment
+        of each major in universities gathered by the Institute of Education
+Sciences through surveys across United States. One can find more information
+ about the dataset", a(strong("here,"),
         href = "https://nces.ed.gov/programs/digest/"
       ),
-      "we are using includes education information
-        starting from 2012 to current year.
-        More specifically, we will be looking at statistics about genders,
-        degree types, study areas, and ethnicities."
+      "which includes education information
+    from 2012 to present year."
     ),
-    p("This data set can be beneficial for many people to view.
-          However, our target audience are females because they may feel
-            discriminated due to their gender.
-          They might believe that there are gender salary gaps.
-          With the data that our team analyzes, we can compare
-            different years of salaries for each college major.
-          Then we will analyze major choices
-            that males and females tend to make.
-          Using this dataset, we can help our target audience discover
-            the real reason behind gender salary gap."),
-    p("The audience of this project will,", em("hopefully"), "learn:"),
-    tags$li("gender and salary gaps armong different majors,"),
-    tags$li("the cause of gender gaps,"),
-    tags$li("gender difference in different majors,"),
-    tags$li("salary gap between majors and genders")
+    p("There are a lot of factors when considering the gender salary gap.
+It is nearly impossible to consider all the factors that contributes to the
+gender salary gap, however our team chose the most valuable factors when 
+considering gender gap salary from our datas. Our project will foucs on 
+audiences who believe there is still a huge difference in gender salary 
+gap and with this project, we hope to have changed their mind by the end."),
+    p("The three", em("charts"), " of this project will represent:"),
+    tags$li("Gender Difference among Majors"),
+    tags$li("Main contributor to Wage Gap"),
+    tags$li("Gender difference in Occupations"),
+    h3("Authors:"),
+    tags$li("Matthew Cho"),
+    tags$li("Jason Li"),
+    tags$li("Colson Xu"),
+    tags$li("Zhennan Zhou")
+
   ),
 
   # tab 2
@@ -193,8 +193,8 @@ shinyUI(navbarPage(
       ),
       mainPanel(
         plotOutput("job_plot", width = "900px", height = "600px"),
-        plotOutput("lowest_plot",width = "900px", height = "600px"),
-        plotOutput("highest_plot",width = "900px", height = "600px")
+        plotOutput("lowest_plot", width = "900px", height = "600px"),
+        plotOutput("highest_plot", width = "900px", height = "600px")
       )
     )
   )

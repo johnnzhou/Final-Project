@@ -4,6 +4,7 @@ library(plotly)
 library(shiny)
 library(ggplot2)
 library(ggrepel)
+library(lintr)
 
 
 source("analysis.R")
@@ -19,7 +20,6 @@ jobs <- read.csv("data/job_salary_and_gender_percentage.csv",
 
 
 server <- function(input, output) {
-    
   diff_data <- reactive({
     difference <- major_enrollment %>%
       arrange(-`Percentage of Male`)
@@ -34,7 +34,6 @@ server <- function(input, output) {
     difference <- filter(difference, major %in% input$major_list_top)
     return(difference)
   })
-  
 
   output$diff_plot <- renderPlot({
     diff_plot <- ggplot(diff_data()) +
@@ -107,7 +106,6 @@ server <- function(input, output) {
 
   # second plot
 
- 
   diff_data_least <- reactive({
     difference_female <- major_enrollment %>%
       arrange(-`Percentage of Female`)
