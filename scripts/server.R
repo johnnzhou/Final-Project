@@ -5,8 +5,6 @@ library(shiny)
 library(ggplot2)
 library(ggrepel)
 library(lintr)
-
-
 source("analysis.R")
 
 major_data <- read.csv("data/major_enrollment.csv", stringsAsFactors = F)
