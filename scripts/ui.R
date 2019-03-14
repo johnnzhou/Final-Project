@@ -128,10 +128,10 @@ ui <- navbarPage(
         )
       ),
       mainPanel(
-        plotlyOutput("diff_plot_top", height = "600px"),
+        plotOutput("diff_plot_top", height = "600px"),
         plotOutput("trend_plot_male", height = "450px"),
         hr(),
-        plotlyOutput("diff_plot_least", height = "600px"),
+        plotOutput("diff_plot_least", height = "600px"),
         plotOutput("trend_plot_female", height = "450px")
       )
     )
