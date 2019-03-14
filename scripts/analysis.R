@@ -60,9 +60,11 @@ major_list_least <- drop_na(major_list_least) %>%
     head(20)
 major_list_least <- unlist(major_list_least, use.names = FALSE)
 
+
 ######################### Jason ############################
 jobs <- read.csv("data/job_salary_and_gender_percentage.csv",
-                 stringsAsFactors = FALSE)
+  stringsAsFactors = FALSE
+)
 
 jobs_filter <- jobs %>%
     select(Occupation, Median.earnings.total,

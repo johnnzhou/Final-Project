@@ -1,3 +1,9 @@
+## prepare necessary packages
+# install.packages("shinythemes")
+# install.packages("tableHTML")
+# install.packages("shiny")
+
+library(shinythemes)
 library(tableHTML)
 library(shiny)
 library(lintr)
@@ -31,6 +37,7 @@ ui <- navbarPage(
                         text-align: left;
                     }
                 ")),
+
         titlePanel("Gender Gap Statistics in the U.S"),
         h6("Copyright Recruiting Times"),
         h3("Purpose of the project"),
@@ -159,6 +166,24 @@ ui <- navbarPage(
     tabPanel(
         "Gender Difference in Jobs",
         titlePanel("Top 10 vs Bottom 10 jobs"),
+        h4("In this tab, users can select an input to get the ",
+          strong("top 10 occupations based on salary"), "or",
+          strong("bottom 10 occupations based on salary."),
+          "These two datas are shown
+          through bar graphs with the x-axis displaying the different occupations and
+          y-axis displaying the salaries.", "Underneath the salary graphs, users can
+          select one occupations from any", strong("top 10 most paid"), "or",
+          strong("bottom 10 least paid"),
+          "occupations to view the gender differences in
+          the pie chart."),
+        h4("From the bar graph and the pie chart that is shown below. The bar graph
+          shows the top 10 and the bottom 10 jobs. The pie chart shows the
+          gender percentage in each of those jobs. We can conclude that the most of the
+          top 10 jobs have a higher percentage of male then female, while the bottom 10
+          jobs shows higher percentage of female then male. This proves that when
+          calculating the median salary for male and female, it shows that male will
+          have a higher salary from this dataset which would be biased and not calculated
+          accordingly with other factors."),
         sidebarLayout(
             sidebarPanel(
                 selectInput("work", h3("Top vs Bottom"),
