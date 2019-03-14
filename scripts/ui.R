@@ -8,26 +8,26 @@ ui <- navbarPage(
   tabPanel(
     "Overview",
     tags$style(HTML("
-             @import url('https://fonts.googleapis.com/css?family=Oswald:500');
-                        h2 {
-                        font-family: 'Oswald', sans-serif;
-                        font-weight: 500;
-                        line-height: 1.1;
-                        color: #393c42;
-                        }
-                        h3 {
-                        font-family: 'Oswald', sans-serif;
-                        font-weight: 500;
-                        line-height: 1.1;
-                        color: #393c42;
-                        }
-                        h6 {
-                        font-family: 'Oswald', sans-serif;
-                        font-weight: 100;
-                        line-height: 1.1;
-                        color: #545859;
-                        text-align: left;
-                        }
+        @import url('https://fonts.googleapis.com/css?family=Oswald:500');
+            h2 {
+                font-family: 'Oswald', sans-serif;
+                font-weight: 500;
+                line-height: 1.1;
+                color: #393c42;
+            }
+            h3 {
+                font-family: 'Oswald', sans-serif;
+                font-weight: 500;
+                line-height: 1.1;
+                color: #393c42;
+            }
+            h6 {
+                font-family: 'Oswald', sans-serif;
+                font-weight: 100;
+                line-height: 1.1;
+                color: #545859;
+                text-align: left;
+            }
                 ")),
     titlePanel("Overview: Gender, Major and Salary Gap"),
     img(
