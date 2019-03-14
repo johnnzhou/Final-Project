@@ -355,7 +355,7 @@ server <- function(input, output) {
       title <- "Top 10 paid jobs in U.S"
     } else {
       data_f <- least()
-      title <- "Least 10 paid jobs in U.S"
+      title <- "Bottom 10 paid jobs in U.S"
     }
     ggplot(data = data_f) +
       geom_bar(
@@ -369,7 +369,8 @@ server <- function(input, output) {
         hjust = 0.5
       )) +
       theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-      theme(text = element_text(size = 15), legend.position = "none")
+      theme(text = element_text(size = 15, face = "bold"),
+            legend.position = "none")
   })
   ############################ Jason #################################
   blank_theme <- theme_minimal() +
