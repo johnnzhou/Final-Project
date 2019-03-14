@@ -1,33 +1,32 @@
 library(tableHTML)
 library(shiny)
-library(plotly)
 source("analysis.R")
 
-ui <- navbarPage(
+shinyUI(navbarPage(
   "Gender and Salary",
   tabPanel(
     "Overview",
     tags$style(HTML("
-        @import url('https://fonts.googleapis.com/css?family=Oswald:500');
-            h2 {
-                font-family: 'Oswald', sans-serif;
-                font-weight: 500;
-                line-height: 1.1;
-                color: #393c42;
-            }
-            h3 {
-                font-family: 'Oswald', sans-serif;
-                font-weight: 500;
-                line-height: 1.1;
-                color: #393c42;
-            }
-            h6 {
-                font-family: 'Oswald', sans-serif;
-                font-weight: 100;
-                line-height: 1.1;
-                color: #545859;
-                text-align: left;
-            }
+             @import url('https://fonts.googleapis.com/css?family=Oswald:500');
+                        h2 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 500;
+                        line-height: 1.1;
+                        color: #393c42;
+                        }
+                        h3 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 500;
+                        line-height: 1.1;
+                        color: #393c42;
+                        }
+                        h6 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 100;
+                        line-height: 1.1;
+                        color: #545859;
+                        text-align: left;
+                        }
                 ")),
     titlePanel("Overview: Gender, Major and Salary Gap"),
     h6("Copyright Recruiting Times"),
@@ -128,7 +127,7 @@ ui <- navbarPage(
         )
       ),
       mainPanel(
-        plotOutput("diff_plot_top", height = "600px"),
+        plotOutput("diff_plot", height = "600px"),
         plotOutput("trend_plot_male", height = "450px"),
         hr(),
         plotOutput("diff_plot_least", height = "600px"),
@@ -138,56 +137,60 @@ ui <- navbarPage(
   ),
 
   # tab 3
-    tabPanel(
-        "The Main Contributor to Wage Gap",
-        titlePanel("Female Percentage vs. Major Median Salary"),
-        h4("In this study, we compare how male and female choose
-              their major, and how those major pays in five years.
-              We believe this study can best reflect the real reason behind
-              gender salary gap. The reason is that through comparing
-              major choice and how well ", strong("that major "), "pays,
-              we illiminate individual factors that create wage gap like
-              how one perform in job and how he/she is willing to show up
-              anytime his/her boss calls without prior notice.
-              Thus, we can isolate the one variable we want to study: ",
-              strong("INDIVIDUAL CHOICE OF MAJOR"), br(), br(),
-              "Furthermore, the salary data we use is the median base
-              salary after working in a position 5 years. ", strong(
-              "It illiminates confunding variables like pregnancy leave
-              and individual performance.")),
+  tabPanel(
+    "The Main Contributor to Wage Gap",
+    titlePanel("Female Percentage vs. Major Median Salary"),
+    sidebarLayout(
+      sidebarPanel(
+        checkboxInput("trend", label = "Show Trend Line", value = F),
+        sliderInput("perc_select",
+          label = "Select Percentage Range",
+          min = 0, max = 1, value = c(0, 1)
+        ),
         hr(),
-        sidebarLayout(
-            sidebarPanel(
-                h2("Graph Controls"),
-                checkboxInput("trend", label = "Show Trend Line", value = F),
-                sliderInput("perc_select", label = "Select Percentage Range",
-                            min = 0, max = 1, value = c(0, 1))
-            ),
-            mainPanel(
-                plotlyOutput("female_perc_vs_major_pay"),
-                hr(),
-                plotlyOutput("male_perc_vs_major_pay")
-            )
+        h4(
+          "In this study, we compare how male and female choose
+                  their major, and how those major pays in five years.
+                  We believe this study can best reflect the real reason behind
+                  gender salary gap. The reason is that through comparing
+                  major choice and how well ", strong("that major "), "pays,
+                  we illiminate individual factors that create wage gap like
+                  how one perform in job and how he/she is willing to show up
+                  anytime his/her boss calls without prior notice.
+                  Thus, we can isolate the one variable we want to study: ",
+          strong("INDIVIDUAL MAJOR CHOICE"), br(), br(),
+          "Furthermore, the salary data we use is the median base
+                  salary after working in a position 5 years. ", strong(
+            "It illiminates confunding variables like pregnancy leave
+                  and individual performance."
+          )
         )
-    ),
+      ),
+      mainPanel(
+        plotlyOutput("female_perc_vs_major_pay"),
+        hr(),
+        plotlyOutput("male_perc_vs_major_pay")
+      )
+    )
+  ),
 
-    # This tab shows the top 10 jobs and the bottom 10 jobs and the
-    # gender difference in those jobs
-    tabPanel(
-        "Gender Difference in Jobs",
-        titlePanel("Top 10 vs Bottom 10 jobs"),
-        sidebarLayout(
-            sidebarPanel(
-                selectInput("work", label = h3("Top vs Bottom"),
-                            choices = list("Top" = 1, "Bottom" = 2))
-            ),
-            mainPanel(
-                plotlyOutput("female_perc_vs_major_pay"),
-                hr(),
-                plotlyOutput("male_perc_vs_major_pay")
-            )
+  # This tab shows the top 10 jobs and the bottom 10 jobs and the
+  # gender difference in those jobs
+  tabPanel(
+    "Gender Difference in Jobs",
+    titlePanel("Top 10 vs Bottom 10 jobs"),
+    sidebarLayout(
+      sidebarPanel(
+        selectInput("work",
+          label = h3("Top vs Bottom"),
+          choices = list("Top" = 1, "Bottom" = 2)
         )
-    ),
+      ),
+      mainPanel(
+        plotOutput("job_plot", width = "900px", height = "600px")
+      )
+    )
+  ),
 
   # tab 5
   tabPanel(
@@ -201,4 +204,4 @@ ui <- navbarPage(
       )
     )
   )
-)
+))
