@@ -1,11 +1,3 @@
-## prepare necessary packages
-# install.packages("tableHTML")
-# install.packages("shiny")
-# install.packages("dplyr")
-# install.packages("ggplot2")
-# install.packages("ggrepel")
-# install.packages("plotly")
-
 library(shiny)
 library(dplyr)
 library(plotly)
