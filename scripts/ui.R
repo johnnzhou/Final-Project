@@ -7,7 +7,6 @@ library(shinythemes)
 library(tableHTML)
 library(shiny)
 library(lintr)
-library(shinythemes)
 source("analysis.R")
 
 ui <- navbarPage(
@@ -42,21 +41,24 @@ ui <- navbarPage(
         h6("Copyright Recruiting Times"),
         h3("Purpose of the project"),
         h4("Ever heard of the term Gender Gap? It is commonly known as the
-            gender pay gap, which is the difference in the average salary
-            earned between men and women. Even though today's society is
-            moving towards gender equality, people still believe that there
-            is a massive difference in salary among men and women. However,
-            in reality there really isn't that big of a gender pay gap
-            in our society. This project will support the statement that
-            there isn't a salary discrimation among women compared to men."),
+			gender pay gap, which is the difference in the average salary
+			earned between men and women. Even though today's society is moving
+			towards gender equality, people still believe that there is a
+			massive difference in salary among men and women. However,
+			in reality there really isn't that big of a gender pay gap
+			in our society. This project will support the statement that
+			gender wage gap is mainly due to individual choices"),
         h4("To support our statment, our group will use the statistics of
-            enrollment of each major in universities gathered by the
-            Institute of Education Sciences through surveys across
-            United States. One can find more information
-            about the dataset", a(strong("here,"),
-            href = "https://nces.ed.gov/programs/digest/"),
-            "which includes education information
-            from 2012 to present year."),
+        	enrollment of each major in universities gathered by the Institute
+        	of Education Sciences through surveys across United States. One
+        	can find more information about the dataset", a(strong("here,"),
+        	href = "https://nces.ed.gov/programs/digest/"), 
+        	"which includes education information
+    		from 2012 to present year.",
+      		a("The other dataset coming from Department of Labor",
+        	href = "https://www.dol.gov/wb/occupations_interactive_txt.htm"),
+    		"gives us information regarding gender percentage
+      		and salary in different occupations."),
         h4("There are a lot of factors when considering the gender salary gap.
             It is nearly impossible to consider all the factors that
             contributes to the gender salary gap, however our team chose
