@@ -29,11 +29,6 @@ shinyUI(navbarPage(
                         }
                 ")),
     titlePanel("Overview: Gender, Major and Salary Gap"),
-    img(
-      src =
-        "https://recruitingtimes.org/wp-content/uploads/2016/11/
-        Gender-Pay-Gap.png"
-    ),
     h6("Copyright Recruiting Times"),
     h3("Author:"),
     tags$li("Jason Li"),
