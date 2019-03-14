@@ -56,3 +56,11 @@ major_list_least <- drop_na(major_list_least) %>%
   select(major) %>%
   head(20)
 major_list_least <- unlist(major_list_least, use.names = FALSE)
+
+perc_to_double <- function(x) {
+    as.numeric(gsub("%", "", x)) / 100
+}
+
+double_to_perc <- function(x) {
+    paste0(round(x, 4) * 100, "%")
+}
