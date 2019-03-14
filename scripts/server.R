@@ -17,10 +17,9 @@ server <- function(input, output) {
         difference <- major_data %>%
             arrange(-`Percentage of Male`) %>%
             left_join(best_25, by = "major") %>%
-            melt(
-                   id.vars = c("major","median_pay"),
-                   variable.name = "type",
-                   value.name = "percentage") %>%
+            melt(id.vars = c("major","median_pay"),
+                 variable.name = "type",
+                 value.name = "percentage") %>%
             drop_na() %>%
             filter(major %in% input$major_list_top)
         return(difference)
