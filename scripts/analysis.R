@@ -34,9 +34,9 @@ major_list_top <- major_enrollment %>%
   arrange(-`Percentage of Male`)
 major_list_top <- left_join(major_list_top, best_25, by = "major")
 major_list_top <- melt(major_list_top,
-                       id.vars = c("major", "median_pay"),
-                       variable.name = "type",
-                       value.name = "percentage"
+  id.vars = c("major", "median_pay"),
+  variable.name = "type",
+  value.name = "percentage"
 )
 major_list_top <- drop_na(major_list_top) %>%
   select(major) %>%
@@ -48,9 +48,9 @@ major_list_least <- major_enrollment %>%
   arrange(-`Percentage of Female`)
 major_list_least <- left_join(major_list_least, worst_25, by = "major")
 major_list_least <- melt(major_list_least,
-                         id.vars = c("major", "median_pay"),
-                         variable.name = "type",
-                         value.name = "percentage"
+  id.vars = c("major", "median_pay"),
+  variable.name = "type",
+  value.name = "percentage"
 )
 major_list_least <- drop_na(major_list_least) %>%
   select(major) %>%
@@ -58,15 +58,20 @@ major_list_least <- drop_na(major_list_least) %>%
 major_list_least <- unlist(major_list_least, use.names = FALSE)
 
 
-##################Jason#####################
+################## Jason#####################
 jobs <- read.csv("data/job_salary_and_gender_percentage.csv",
-                 stringsAsFactors = FALSE)
+  stringsAsFactors = FALSE
+)
 
 jobs_filter <- jobs %>%
-  select(Occupation, Median.earnings.total,
-         Percentage.of.women.in.occupational.group) %>%
-  rename(Occupation = Occupation, salary = Median.earnings.total,
-         women = Percentage.of.women.in.occupational.group) %>%
+  select(
+    Occupation, Median.earnings.total,
+    Percentage.of.women.in.occupational.group
+  ) %>%
+  rename(
+    Occupation = Occupation, salary = Median.earnings.total,
+    women = Percentage.of.women.in.occupational.group
+  ) %>%
   mutate(men = 100 - women)
 
 lower_perc <- jobs_filter %>%
