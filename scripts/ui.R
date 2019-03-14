@@ -38,6 +38,9 @@ ui <- navbarPage(
                 ")),
 
         titlePanel("Gender Gap Statistics in the U.S"),
+        img(src =
+    "https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png"
+        ),
         h6("Copyright Recruiting Times"),
         h3("Purpose of the project"),
         h4("Ever heard of the term Gender Gap? It is commonly known as the
@@ -93,14 +96,17 @@ ui <- navbarPage(
             in the different salary levels, which illustrates the general
             trend between the percentage of male/female and the
             median salary."),
-        h4("We have concluded from this chart and analysis that across
-            the country, females tend to have less salary than males on average.
-            The percentage of female working in the industry decreases as the
-            median salary increases. Even in the Female Dominant Majors,
-            less females work in the industry than males do as the average
-            salary increases. In highly-paid industries, such as Computer
-            Science and Electrical Engineering, the percentage of males
-            outnumber the percentage of female."),
+        h4("We have concluded from these charts and analysis that
+            across the country, females tend not to have highly-paid
+            majors, such as engineering and information science, as
+            female tends to have less salary than males on average.
+            The percentage of female and male in the industries diverges
+            as the median salary increases. Even though this is the
+            case(male-dominant majors), the salary difference is not as big as
+            we imagined in the first place. There are some industries,
+            such as Health Science and Communication, where females are
+            shining out. Females are making more contributions and earning more
+            in those industries."),
         hr(),
         sidebarLayout(
             sidebarPanel(
@@ -134,19 +140,19 @@ ui <- navbarPage(
     tabPanel(
         "The Main Contributor to Wage Gap",
         titlePanel("Female Percentage vs. Major Median Salary"),
-        h4("In this study, we compare how male and female choose
-            their major, and how those major pays in five years.
-            We believe this study can best reflect the real reason behind
+        h4("In this study, we compare how males and females choose
+            their major, and the major salaries in five years.
+            We believe this study can best reflect the reason behind
             gender salary gap. The reason is that through comparing
             major choice and how well ", strong("that major "), "pays,
-            we illiminate individual factors that create wage gap like
-            how one perform in job and how he/she is willing to show up
-            anytime his/her boss calls without prior notice.
+            we eliminate individual factors that create wage gap like
+            how one performs in a job and how they are willing to show up
+            anytime their boss calls without prior notice.
             Thus, we can isolate the one variable we want to study: ",
             strong("INDIVIDUAL MAJOR CHOICE"), br(), br(),
             "Furthermore, the salary data we use is the median base
-            salary after working in a position 5 years. ", strong(
-            "It illiminates confunding variables like pregnancy leave
+            salary after working in a position for 5 years. ", strong(
+            "It eliminates confounding variables like pregnancy leave
             and individual performance.")),
         sidebarLayout(
             sidebarPanel(
