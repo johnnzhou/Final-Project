@@ -1,10 +1,16 @@
+## prepare necessary packages
+# install.packages("tableHTML")
+# install.packages("shiny")
+# install.packages("dplyr")
+# install.packages("ggplot2")
+# install.packages("ggrepel")
+# install.packages("plotly")
+
 library(shiny)
 library(dplyr)
 library(plotly)
-library(shiny)
 library(ggplot2)
 library(ggrepel)
-library(lintr)
 source("analysis.R")
 
 major_data <- read.csv("data/major_enrollment.csv", stringsAsFactors = F)
@@ -18,7 +24,7 @@ jobs <- read.csv("data/job_salary_and_gender_percentage.csv",
 
 
 server <- function(input, output) {
-  diff_data <- reactive({
+    diff_data <- reactive({
     difference <- major_enrollment %>%
       arrange(-`Percentage of Male`)
     difference <- left_join(difference, best_25, by = "major")
@@ -67,14 +73,14 @@ server <- function(input, output) {
           face = "bold"
         )
       ) +
-      theme(legend.position = "bottom", legend.box = "horizontal") +
+      theme(legend.position = "top", legend.box = "horizontal") +
       theme(axis.text.x = element_text(angle = 45, hjust = 1))
     return(diff_plot)
   })
 
   output$trend_plot_male <- renderPlot({
     if (input$male_trend) {
-      trend <- ggplot(diff_data()) +
+        trend <- ggplot(diff_data()) +
         geom_smooth(
           method = "loess",
           mapping = aes(
@@ -95,7 +101,7 @@ server <- function(input, output) {
         geom_text_repel(aes(x = median_pay, y = percentage, label = major),
           size = 3, alpha = 0.75
         ) +
-        theme(legend.position = "bottom", legend.box = "horizontal")
+        theme(legend.position = "top", legend.box = "horizontal")
     } else {
       trend <- 0
     }
@@ -104,22 +110,22 @@ server <- function(input, output) {
 
   # second plot
 
-  diff_data_least <- reactive({
-    difference_female <- major_enrollment %>%
-      arrange(-`Percentage of Female`)
-    difference_female <- left_join(difference_female,
-      worst_25,
-      by = "major"
-    )
-    difference_female <- filter(
-      difference_female,
-      major %in% input$major_list_least
+    diff_data_least <- reactive({
+        difference_female <- major_enrollment %>%
+        arrange(-`Percentage of Female`)
+        difference_female <- left_join(difference_female,
+            worst_25,
+            by = "major"
+        )
+        difference_female <- filter(
+        difference_female,
+        major %in% input$major_list_least
     )
 
     difference_female <- melt(difference_female,
-      id.vars = c("major", "median_pay"),
-      variable.name = "type",
-      value.name = "percentage"
+        id.vars = c("major", "median_pay"),
+        variable.name = "type",
+        value.name = "percentage"
     )
     difference_female <- drop_na(difference_female)
 
@@ -168,7 +174,7 @@ server <- function(input, output) {
           face = "bold"
         )
       ) +
-      theme(legend.position = "bottom", legend.box = "horizontal") +
+      theme(legend.position = "top", legend.box = "horizontal") +
       theme(axis.text.x = element_text(angle = 45, hjust = 1))
     return(diff_plot_least)
   })
@@ -198,7 +204,7 @@ server <- function(input, output) {
           y = percentage,
           label = major
         ), size = 3, alpha = 0.75) +
-        theme(legend.position = "bottom", legend.box = "horizontal")
+        theme(legend.position = "top", legend.box = "horizontal")
     } else {
       trend_female <- 0
     }
@@ -400,7 +406,7 @@ server <- function(input, output) {
                )
       ) + coord_polar("y", start = 0) +
       scale_fill_brewer(palette = "Set2")+
-      geom_text(aes(x = Occupation,
+      geom_label_repel(aes(x = Occupation,
                     y = percentage,
                     label = paste0(percentage, "%")), 
                 vjust = 1,
@@ -442,7 +448,7 @@ server <- function(input, output) {
                )
       ) + coord_polar("y", start = 0) +
       scale_fill_brewer(palette = "Set3")+
-      geom_text(aes(x = Occupation,
+      geom_label_repel(aes(x = Occupation,
                     y = percentage,
                     label = paste0(percentage, "%")), 
                 vjust = 1,
@@ -459,8 +465,6 @@ server <- function(input, output) {
       axis.text.x=element_blank())
     return(highest_plot)
     
+    
   })
-
-
-
 }

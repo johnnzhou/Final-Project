@@ -1,35 +1,44 @@
+## prepare necessary packages
+# install.packages("shinythemes")
+# install.packages("tableHTML")
+# install.packages("shiny")
+
+library("shinythemes")
 library(tableHTML)
 library(shiny)
-library(lintr)
 source("analysis.R")
 
 shinyUI(navbarPage(
-  "Gender Gap",
-  tabPanel(
+    
+    "Gender Gap",
+    tabPanel(
     "Overview",
-    tags$style(HTML("
-             @import url('https://fonts.googleapis.com/css?family=Oswald:500');
-                        h2 {
-                        font-family: 'Oswald', sans-serif;
-                        font-weight: 500;
-                        line-height: 1.1;
-                        color: #393c42;
-                        }
-                        h3 {
-                        font-family: 'Oswald', sans-serif;
-                        font-weight: 500;
-                        line-height: 1.1;
-                        color: #393c42;
-                        }
-                        h6 {
-                        font-family: 'Oswald', sans-serif;
-                        font-weight: 100;
-                        line-height: 1.1;
-                        color: #545859;
-                        text-align: left;
-                        }
-                ")),
+    shinythemes::themeSelector(),
+    #' tags$style(HTML("
+    #'          @import url('https://fonts.googleapis.com/css?family=Oswald:500');
+    #'                     h2 {
+    #'                     font-family: 'Oswald', sans-serif;
+    #'                     font-weight: 500;
+    #'                     line-height: 1.1;
+    #'                     color: #393c42;
+    #'                     }
+    #'                     h3 {
+    #'                     font-family: 'Oswald', sans-serif;
+    #'                     font-weight: 500;
+    #'                     line-height: 1.1;
+    #'                     color: #393c42;
+    #'                     }
+    #'                     h6 {
+    #'                     font-family: 'Oswald', sans-serif;
+    #'                     font-weight: 100;
+    #'                     line-height: 1.1;
+    #'                     color: #545859;
+    #'                     text-align: left;
+    #'                     }
+    #'             ")),
     titlePanel("Gender Gap Statistics in the U.S"),
+    img(src = 
+"https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png"),
     h6("Copyright Recruiting Times"),
     h3("Purpose of the project"),
     p(
@@ -56,6 +65,7 @@ gender salary gap, however our team chose the most valuable factors when
 considering gender gap salary from our datas. Our project will foucs on
 audiences who believe there is still a huge difference in gender salary
 gap and with this project, we hope to have changed their mind by the end."),
+    h3("The plots"),
     p("The three", em("charts"), " of this project will represent:"),
     tags$li("Gender Difference among Majors"),
     tags$li("Main contributor to Wage Gap"),
@@ -77,8 +87,8 @@ gap and with this project, we hope to have changed their mind by the end."),
             National Center for Education Statistics,
             which demonstrate the percentage difference
             of males and females in different majors.
-          Specifically, the two  bar plots compare the number
-        of male students and female students top-20 male
+          Specifically, the two bar plots compare the number
+        of male students and female students in the top-20 male
         dominant and female dominant majors.
           The datasets can be chosen with", strong("different checkboxes"),
       "that categorize different majors."
@@ -91,14 +101,15 @@ gap and with this project, we hope to have changed their mind by the end."),
     of male/female and the median salary."
     ),
     p("We have concluded from this chart and analysis that across the country,
-          females tend to have less salary than males on average.
-          The percentage of female working in the industry
-            decreases as the median salary increases.
-          Even in the Female Dominant Majors, less females work in the industry
-        than males do as the average salary increases.
-        In highly-paid industries,
-      such as Computer Science and Electrical Engineering,
-      the percentage of males outnumber the percentage of female."),
+        females tend not to have highly-paid majors, such as engineering and
+        information science, as female tends to have 
+        less salary than males on average. The percentage of female and 
+        male in the industries diverges as the median salary increases. Even
+      though this is the case(male-dominant majors), 
+        the salary difference is not as big as we
+      imagined in the first place. There are some industries, 
+      such as Health Science and Communication, where females are shining out.
+     Females are making more contributions and earn more in those industries."),
     hr(),
     sidebarLayout(
       sidebarPanel(
@@ -128,9 +139,11 @@ gap and with this project, we hope to have changed their mind by the end."),
       ),
       mainPanel(
         plotOutput("diff_plot", height = "600px"),
+        hr(),
         plotOutput("trend_plot_male", height = "450px"),
         hr(),
         plotOutput("diff_plot_least", height = "600px"),
+        hr(),
         plotOutput("trend_plot_female", height = "450px")
       )
     )
@@ -194,7 +207,8 @@ gap and with this project, we hope to have changed their mind by the end."),
       mainPanel(
         plotOutput("job_plot", width = "900px", height = "600px"),
         plotOutput("lowest_plot", width = "900px", height = "600px"),
-        plotOutput("highest_plot", width = "900px", height = "600px")
+        plotOutput("highest_plot", width = "900px", height = "600px"),
+        plotlyOutput("plotly_test")
       )
     )
   )
