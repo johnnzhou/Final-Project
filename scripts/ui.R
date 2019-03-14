@@ -35,7 +35,7 @@ shinyUI(navbarPage(
     tags$li("Colson Xu"),
     tags$li("Matthew Cho"),
     h3("Project Description"),
-    h4(
+    p(
       "Our group will use the statistics of enrollment
         of each major in universities.
         Institute of Education Sciences gathered these statistics
@@ -50,7 +50,7 @@ shinyUI(navbarPage(
         More specifically, we will be looking at statistics about genders,
         degree types, study areas, and ethnicities."
     ),
-    h4("This data set can be beneficial for many people to view.
+    p("This data set can be beneficial for many people to view.
           However, our target audience are females because they may feel
             discriminated due to their gender.
           They might believe that there are gender salary gaps.
@@ -60,7 +60,7 @@ shinyUI(navbarPage(
             that males and females tend to make.
           Using this dataset, we can help our target audience discover
             the real reason behind gender salary gap."),
-    h4("The audience of this project will,", em("hopefully"), "learn:"),
+    p("The audience of this project will,", em("hopefully"), "learn:"),
     tags$li("gender and salary gaps armong different majors,"),
     tags$li("the cause of gender gaps,"),
     tags$li("gender difference in different majors,"),
@@ -71,7 +71,7 @@ shinyUI(navbarPage(
   tabPanel(
     "Gender Difference in Majors",
     titlePanel("Gender Difference in Majors"),
-    h4(
+    p(
       "The bar graph below uses the data from
             National Center for Education Statistics,
             which demonstrate the percentage difference
@@ -82,14 +82,14 @@ shinyUI(navbarPage(
           The datasets can be chosen with", strong("different checkboxes"),
       "that categorize different majors."
     ),
-    h4(
+    p(
       "The", strong("Show trend"),
       "checkbox is used to show the percentage of male and female
     in the different salary levels,
     which illustrates the general trend between the percentage
     of male/female and the median salary."
     ),
-    h4("We have concluded from this chart and analysis that across the country,
+    p("We have concluded from this chart and analysis that across the country,
           females tend to have less salary than males on average.
           The percentage of female working in the industry
             decreases as the median salary increases.
