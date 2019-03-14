@@ -127,10 +127,10 @@ gap and with this project, we hope to have changed their mind by the end."),
         )
       ),
       mainPanel(
-        plotOutput("diff_plot", height = "600px"),
+        plotlyOutput("diff_plot_top", height = "600px"),
         plotOutput("trend_plot_male", height = "450px"),
         hr(),
-        plotOutput("diff_plot_least", height = "600px"),
+        plotlyOutput("diff_plot_least", height = "600px"),
         plotOutput("trend_plot_female", height = "450px")
       )
     )

@@ -87,3 +87,10 @@ higher_perc <- jobs_filter %>%
 higher_perc$Occupation[1] <- "Surgeons"
 higher_perc$Occupation[4] <- "Engineering Managers"
 
+perc_to_double <- function(x) {	
+    as.numeric(gsub("%", "", x)) / 100	
+}	
+
+double_to_perc <- function(x) {	
+    paste0(round(x, 4) * 100, "%")	
+}
