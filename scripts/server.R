@@ -360,7 +360,7 @@ server <- function(input, output) {
     ggplot(data = data_f) +
       geom_bar(
         stat = "identity",
-        mapping = aes(x = Occupation, y = salary)
+        mapping = aes(x = Occupation, y = salary, fill = salary)
       ) +
       labs(x = "Job Title", y = "Salary", title = title) +
       theme_bw() +
@@ -369,7 +369,7 @@ server <- function(input, output) {
         hjust = 0.5
       )) +
       theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-      theme(text = element_text(size = 15))
+      theme(text = element_text(size = 15), legend.position = "none")
   })
   ############################ Jason #################################
   blank_theme <- theme_minimal() +
