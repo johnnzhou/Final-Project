@@ -10,6 +10,7 @@ jobs <- read.csv("data/job_salary_and_gender_percentage.csv",
                  stringsAsFactors = FALSE)
 
 server <- function(input, output) {
+    
   diff_data <- reactive({
     difference <- major_enrollment %>%
       arrange(-`Percentage of Male`)
@@ -63,38 +64,6 @@ server <- function(input, output) {
     return(diff_plot)
   })
 
-    ############################ John ############################
-    # First Plot
-    diff_data_top <- reactive({
-        difference <- major_data %>%
-            arrange(-`Percentage of Male`) %>%
-            left_join(best_25, by = "major") %>%
-            melt(
-                   id.vars = c("major","median_pay"),
-                   variable.name = "type",
-                   value.name = "percentage") %>%
-            drop_na() %>%
-            filter(major %in% input$major_list_top)
-        return(difference)
-    })
-
-    output$diff_plot_top <- renderPlotly({
-        plot_ly(diff_data_top(),
-                text = paste0("Major: ",
-                              diff_data_top()$major,
-                              "<br>Percentage: ",
-                              double_to_perc(diff_data_top()$percentage)),
-                x = ~major,
-                y = ~percentage,
-                type = "bar",
-                hoverinfo = "text",
-                color = ~type) %>%
-            layout(title = "Best Paid Majors and Their Gender Percentage",
-                   xaxis = list(title = "Majors"),
-                   yaxis = list(title = "Gender Distribution"),
-                   barmode = "stack")
-    })
-
     output$trend_plot_male <- renderPlot({
         if(input$male_trend) {
             trend <- ggplot(diff_data_top())+
@@ -124,34 +93,27 @@ server <- function(input, output) {
     })
 
     # Second Plot
-    diff_data_least <- reactive({
-        difference_female <- major_data %>%
-            arrange(-`Percentage of Female`) %>%
-            left_join(worst_25, by = "major") %>%
-            filter(major %in% input$major_list_least) %>%
-            melt(id.vars = c("major","median_pay"),
-                 variable.name = "type",
-                 value.name = "percentage") %>%
-                 drop_na()
-        return(difference_female)
-    })
+diff_data_least <- reactive({
+    difference_female <- major_enrollment %>%
+      arrange(-`Percentage of Female`)
+    difference_female <- left_join(difference_female,
+      worst_25,
+      by = "major"
+    )
+    difference_female <- filter(
+      difference_female,
+      major %in% input$major_list_least
+    )
 
-    output$diff_plot_least <- renderPlotly({
-        plot_ly(diff_data_least(),
-                text = paste0("Major: ",
-                              diff_data_least()$major,
-                              "<br>Percentage: ",
-                              double_to_perc(diff_data_least()$percentage)),
-                x = ~major,
-                y = ~percentage,
-                type = "bar",
-                hoverinfo = "text",
-                color = ~type) %>%
-            layout(title = "Best Paid Majors and Their Gender Percentage",
-                   xaxis = list(title = "Majors"),
-                   yaxis = list(title = "Gender Distribution"),
-                   barmode = "stack")
-    })
+    difference_female <- melt(difference_female,
+      id.vars = c("major", "median_pay"),
+      variable.name = "type",
+      value.name = "percentage"
+    )
+    difference_female <- drop_na(difference_female)
+
+    return(difference_female)
+  })
 
     output$trend_plot_female <- renderPlot({
         if(input$female_trend) {
