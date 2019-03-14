@@ -1,5 +1,5 @@
 # Final Project Proposal
-
+  
 ![](https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png)
 
 ##### Copyright Recruiting Times
