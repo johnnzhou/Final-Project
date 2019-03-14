@@ -33,7 +33,7 @@ server <- function(input, output) {
     difference <- filter(difference, major %in% input$major_list_top)
     return(difference)
   })
-
+  
   output$diff_plot <- renderPlot({
     diff_plot <- ggplot(diff_data()) +
       geom_bar(
@@ -41,8 +41,7 @@ server <- function(input, output) {
         mapping = aes(
           x = major,
           y = percentage,
-          fill = type,
-          width = 0.8
+          fill = type
         )
       ) +
       geom_text(aes(

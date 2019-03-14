@@ -132,6 +132,7 @@ shinyUI(navbarPage(
         )
       ),
       mainPanel(
+        plotlyOutput("test"),
         plotOutput("diff_plot", height = "600px"),
         plotOutput("trend_plot_male", height = "450px"),
         hr(),
