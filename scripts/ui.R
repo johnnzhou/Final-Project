@@ -3,17 +3,16 @@
 # install.packages("tableHTML")
 # install.packages("shiny")
 
-library("shinythemes")
+library(shinythemes)
 library(tableHTML)
 library(shiny)
 source("analysis.R")
 
-shinyUI(navbarPage(
-    
+ui <- navbarPage(
+    theme = shinytheme("yeti"),
     "Gender Gap",
     tabPanel(
     "Overview",
-    shinythemes::themeSelector(),
     tags$style(HTML("
              @import url('https://fonts.googleapis.com/css?family=Oswald:500');
                         h2 {
@@ -212,4 +211,4 @@ gap and with this project, we hope to have changed their mind by the end."),
       )
     )
   )
-))
+)
