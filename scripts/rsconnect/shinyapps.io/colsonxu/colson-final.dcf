@@ -5,8 +5,8 @@ account: colsonxu
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 790222
-bundleId: 1940091
+bundleId: 1940287
 url: https://colsonxu.shinyapps.io/colson-final/
-when: 1552583795.38671
+when: 1552588740.34742
 asMultiple: FALSE
 asStatic: FALSE

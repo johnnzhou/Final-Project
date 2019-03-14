@@ -170,8 +170,8 @@ ui <- navbarPage(
             mainPanel(
                 fluidRow(
                     width = 7, plotOutput("job_plot", height = "400px"),
-                    column(width = 6, plotOutput("lowest_plot")),
-                    column(width = 6, plotOutput("highest_plot"))
+                    column(width = 6, plotlyOutput("lowest_plot")),
+                    column(width = 6, plotlyOutput("highest_plot"))
                 )
             )
         )

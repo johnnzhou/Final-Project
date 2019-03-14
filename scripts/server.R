@@ -296,66 +296,47 @@ server <- function(input, output) {
   
     lowest_paid <- reactive({
         difference_1 <- lower_perc %>%
-            filter(Occupation %in% input$lower_perc)
-            difference_1 <- melt(difference_1,
-                                 id.vars = c("Occupation", "salary"),
-                                 variable.name = "gender",
-                                 value.name = "percentage")
+            filter(Occupation %in% input$lower_perc) %>%
+            melt(id.vars = c("Occupation", "salary"),
+                 variable.name = "gender",
+                 value.name = "percentage")
         return(difference_1)
     })
-  
-    output$lowest_plot <- renderPlot({
-        lowest_plot <- ggplot(lowest_paid()) +
-        geom_bar(stat = "identity",
-                 mapping = aes(
-                 x = Occupation,
-                 y = percentage,
-                 fill = gender,
-                 label = gender)) +
-            coord_polar("y", start = 0) +
-            scale_fill_brewer(palette = "Set2") +
-            geom_text(aes(x = Occupation,
-                          y = percentage,
-                          label = paste0(percentage, "%"))) +
-            labs(title = "Lowest Salary Occupation Gender ") + 
-            blank_theme +
-            theme(plot.title = element_text(hjust = 0.5),
-                  axis.text = element_text(size = 15),
-                  axis.title = element_text(size = 20,face = "bold"),
-                  axis.text.x = element_blank())
-        return(lowest_plot)
-  })
+    
+    output$lowest_plot <- renderPlotly({
+        plot_ly(
+            lowest_paid(),
+            labels = ~gender,
+            values = ~percentage,
+            hoverinfo = "none",
+            marker = list(colors = c("#E76F51", "#0b93ae")),
+            showlegend = F,
+            type = "pie"
+        ) %>%
+            layout(title = paste(lowest_paid()$Occupation,
+                                 "Gender Distribution"))
+    })
   
     # Higher Pay Occupation
     highest_paid <- reactive({
         difference_2 <- higher_perc %>%
-        filter(Occupation %in% input$higher_perc)
-        difference_2 <- melt(difference_2,
-                             id.vars = c("Occupation", "salary"),
-                             variable.name = "gender",
-                             value.name = "percentage")
+            filter(Occupation %in% input$higher_perc) %>%
+            melt(id.vars = c("Occupation", "salary"),
+                 variable.name = "gender",
+                 value.name = "percentage")
         return(difference_2)
     })
-  
-    output$highest_plot <- renderPlot({
-        highest_plot <- ggplot(highest_paid()) +
-        geom_bar(stat = "identity",
-                 mapping = aes(
-                 x = Occupation,
-                 y = percentage,
-                 fill = gender,
-                 label = gender)) +
-            coord_polar("y", start = 0) +
-            scale_fill_brewer(palette = "Set3")+
-            geom_text(aes(x = Occupation,
-                          y = percentage,
-                          label = paste0(percentage, "%"))) +
-            labs(title = "Highest Salary Occupation Gender ") +
-            blank_theme + 
-            theme(plot.title = element_text(hjust = 0.5),
-                  axis.text = element_text(size = 15),
-                  axis.title = element_text(size = 20,face = "bold"),
-                  axis.text.x = element_blank())
-        return(highest_plot)
-  })
+    
+    output$highest_plot <- renderPlotly({
+        plot_ly(
+            highest_paid(),
+            labels = ~gender,
+            values = ~percentage,
+            hoverinfo = "none",
+            marker = list(colors = c("#E76F51", "#0b93ae")),
+            type = "pie"
+        ) %>%
+            layout(title = paste(highest_paid()$Occupation,
+                                 "Gender Distribution"))
+    })
 }
