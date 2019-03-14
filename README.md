@@ -6,9 +6,9 @@
 
 
 ### Author:
+- Colson Xu
 - Jason Li
 - John Zhou
-- Colson Xu
 - Matthew Cho
 
 # [Final Report](https://colsonxu.shinyapps.io/gender-wage-gap/)
