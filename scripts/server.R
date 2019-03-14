@@ -362,4 +362,99 @@ server <- function(input, output) {
       theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
       theme(text = element_text(size = 15))
   })
+  ############################ Jason #################################
+  blank_theme <- theme_minimal() +
+    theme(
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank(),
+      panel.border = element_blank(),
+      panel.grid=element_blank(),
+      axis.ticks = element_blank(),
+      plot.title=element_text(size=14, face="bold")
+    )
+  
+  diff_1 <- reactive({
+    difference_1 <- lower_perc %>%
+      filter(Occupation %in% input$lower_perc)
+    difference_1 <- melt(difference_1,
+                         id.vars = c("Occupation", "salary"),
+                         variable.name = "gender",
+                         value.name = "percentage")
+    return(difference_1)
+  })
+  
+  output$lowest_plot <- renderPlot({
+    lowest_plot <- ggplot(diff_1()) +
+      geom_bar(stat = "identity",
+               mapping = aes(
+                 x = Occupation,
+                 y = percentage,
+                 fill = gender,
+                 label = gender
+               )
+      ) + coord_polar("y", start = 0) +
+      scale_fill_brewer(palette = "Set2")+
+      geom_text(aes(x = Occupation,
+                    y = percentage,
+                    label = paste0(percentage, "%")), 
+                vjust = 1,
+                hjust = -3,
+                color = "black",
+                size = 3
+      )+
+      labs(
+        title = "Lowest Salary Occupation Gender ") + 
+      blank_theme +
+      theme(plot.title = element_text(hjust = 0.5), 
+            axis.text=element_text(size=15),
+            axis.title=element_text(size=20,face="bold"),
+            axis.text.x=element_blank())
+ 
+    return(lowest_plot)
+    
+  })
+  
+  # Higher Pay Occupation
+  diff_2 <- reactive({
+    difference_2 <- higher_perc %>%
+      filter(Occupation %in% input$higher_perc)
+    difference_2 <- melt(difference_2,
+                         id.vars = c("Occupation", "salary"),
+                         variable.name = "gender",
+                         value.name = "percentage")
+    return(difference_2)
+  })
+  
+  output$highest_plot <- renderPlot({
+    highest_plot <- ggplot(diff_2()) +
+      geom_bar(stat = "identity",
+               mapping = aes(
+                 x = Occupation,
+                 y = percentage,
+                 fill = gender,
+                 label = gender
+               )
+      ) + coord_polar("y", start = 0) +
+      scale_fill_brewer(palette = "Set3")+
+      geom_text(aes(x = Occupation,
+                    y = percentage,
+                    label = paste0(percentage, "%")), 
+                vjust = 1,
+                hjust = -3,
+                color = "black",
+                size = 3
+      ) +
+      labs(
+        title = "Highest Salary Occupation Gender ") + 
+      blank_theme + 
+      theme(plot.title = element_text(hjust = 0.5), 
+      axis.text=element_text(size=15),
+      axis.title=element_text(size=20,face="bold"),
+      axis.text.x=element_blank())
+    return(highest_plot)
+    
+  })
+
+
+
 }
