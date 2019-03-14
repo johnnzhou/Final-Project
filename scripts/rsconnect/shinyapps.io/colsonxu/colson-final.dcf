@@ -1,0 +1,12 @@
+name: colson-final
+title: colson-final
+username:
+account: colsonxu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 790222
+bundleId: 1940091
+url: https://colsonxu.shinyapps.io/colson-final/
+when: 1552583795.38671
+asMultiple: FALSE
+asStatic: FALSE
