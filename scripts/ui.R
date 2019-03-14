@@ -30,50 +30,72 @@ ui <- navbarPage(
                         color: #545859;
                         text-align: left;
                     }
+                    .indent {
+                        margin-left: 200px;
+                        margin-right: 200px;
+                    }
+                    .indent-more {
+                        margin-left: 250px;
+                        margin-right: 250px;
+                    }
+                    .cpright {
+                        margin-left: 470px;
+                    }
+                    img {
+                        display: block;
+                        margin-left: auto;
+                        margin-right: auto;
+                        width: 50%;
+                    }
                 ")),
 
         titlePanel("Gender Gap Statistics in the U.S"),
         img(src =
     "https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png"
         ),
-        h6("Copyright Recruiting Times"),
-        h3("Purpose of the project"),
-        h4("Ever heard of the term Gender Gap? It is commonly known as the
-			gender pay gap, which is the difference in the average salary
-			earned between men and women. Even though today's society is moving
-			towards gender equality, people still believe that there is a
-			massive difference in salary among men and women. However,
-			in reality there really isn't that big of a gender pay gap
-			in our society. This project will support the statement that
-			gender wage gap is mainly due to individual choices"),
-        h4("To support our statment, our group will use the statistics of
-        	enrollment of each major in universities gathered by the Institute
-        	of Education Sciences through surveys across United States. One
-        	can find more information about the dataset", a(strong("here,"),
-        	href = "https://nces.ed.gov/programs/digest/"),
-        	"which includes education information
-    		from 2012 to present year.",
-      		a("The other dataset coming from Department of Labor",
-        	href = "https://www.dol.gov/wb/occupations_interactive_txt.htm"),
-    		"gives us information regarding gender percentage
-      		and salary in different occupations."),
-        h4("There are a lot of factors when considering the gender salary gap.
+        h6(class = "cpright", "Copyright Recruiting Times"),
+        h3(class = "indent", "Purpose of the project"),
+        h4(class = "indent", "Ever heard of the term Gender Gap?
+            It is commonly known as the
+            gender pay gap, which is the difference in the average salary
+            earned between men and women. Even though today's society is moving
+            towards gender equality, people still believe that there is a
+            massive difference in salary among men and women. However,
+            in reality there really isn't that big of a gender pay gap
+            in our society. This project will support the statement that
+            gender wage gap is mainly due to individual choices"),
+        h4(class = "indent", "To support our statment, our group will
+            use the statistics of
+            enrollment of each major in universities gathered by the Institute
+            of Education Sciences through surveys across United States. One
+            can find more information about the dataset", a(strong("here"),
+            href = "https://nces.ed.gov/programs/digest/"),
+            ", which includes education information
+            from 2012 to present year.",
+              a("The other dataset coming from Department of Labor",
+            href = "https://www.dol.gov/wb/occupations_interactive_txt.htm"),
+            "gives us information regarding gender percentage
+              and salary in different occupations."),
+        h4(class = "indent", "There are a lot of factors when considering
+            the gender salary gap.
             It is nearly impossible to consider all the factors that
             contributes to the gender salary gap, however our team chose
             the most valuable factors when considering gender gap salary from
             our datas. Our project will foucs on audiences who believe there
             is still a huge difference in gender salary gap and with this
             project, we hope to have changed their mind by the end."),
-        h4("The three", em("charts"), " of this project will represent:"),
-        tags$li("Gender Difference among Majors"),
-        tags$li("Main contributor to Wage Gap"),
-        tags$li("Gender difference in Occupations"),
-        h3("Authors:"),
-        tags$li("Matthew Cho"),
-        tags$li("Jason Li"),
-        tags$li("Colson Xu"),
-        tags$li("Zhennan Zhou")
-      ),
+        h4(class = "indent", "The three", em("charts"), " of this project will
+           represent:"),
+        tags$li(class = "indent-more", "Gender Difference among Majors"),
+        tags$li(class = "indent-more", "Main contributor to Wage Gap"),
+        tags$li(class = "indent-more", "Gender difference in Occupations"),
+        h3(class = "indent", "Authors:"),
+        tags$li(class = "indent-more", "Colson Xu"),
+        tags$li(class = "indent-more", "Jason Li"),
+        tags$li(class = "indent-more", "Matthew Cho"),
+        tags$li(class = "indent-more", "Zhennan Zhou"),
+        br()
+    ),
 
     # John
     tabPanel(
