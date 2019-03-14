@@ -7,27 +7,26 @@ shinyUI(navbarPage(
   tabPanel(
     "Overview",
     tags$style(HTML("
-             @import url('https://fonts.googleapis.com/css?family=Oswald:500');
-                        h2 {
-                        font-family: 'Oswald', sans-serif;
-                        font-weight: 500;
-                        line-height: 1.1;
-                        color: #393c42;
-                        }
-                        h3 {
-                        font-family: 'Oswald', sans-serif;
-                        font-weight: 500;
-                        line-height: 1.1;
-                        color: #393c42;
-                        }
-                        h6 {
-                        font-family: 'Oswald', sans-serif;
-                        font-weight: 100;
-                        line-height: 1.1;
-                        color: #545859;
-                        text-align: left;
-                        }
-                ")),
+         @import url('https://fonts.googleapis.com/css?family=Oswald:500');
+                h2 {
+                    font-family: 'Oswald', sans-serif;
+                    font-weight: 500;
+                    line-height: 1.1;
+                    color: #393c42;
+                }
+                h3 {
+                    font-family: 'Oswald', sans-serif;
+                    font-weight: 500;
+                    line-height: 1.1;
+                    color: #393c42;
+                }
+                h6 {
+                    font-family: 'Oswald', sans-serif;
+                    font-weight: 100;
+                    line-height: 1.1;
+                    color: #545859;
+                    text-align: left;
+                }")),
     titlePanel("Overview: Gender, Major and Salary Gap"),
     h6("Copyright Recruiting Times"),
     h3("Author:"),
@@ -36,7 +35,7 @@ shinyUI(navbarPage(
     tags$li("Colson Xu"),
     tags$li("Matthew Cho"),
     h3("Project Description"),
-    p(
+    h4(
       "Our group will use the statistics of enrollment
         of each major in universities.
         Institute of Education Sciences gathered these statistics
@@ -51,7 +50,7 @@ shinyUI(navbarPage(
         More specifically, we will be looking at statistics about genders,
         degree types, study areas, and ethnicities."
     ),
-    p("This data set can be beneficial for many people to view.
+    h4("This data set can be beneficial for many people to view.
           However, our target audience are females because they may feel
             discriminated due to their gender.
           They might believe that there are gender salary gaps.
@@ -61,7 +60,7 @@ shinyUI(navbarPage(
             that males and females tend to make.
           Using this dataset, we can help our target audience discover
             the real reason behind gender salary gap."),
-    p("The audience of this project will,", em("hopefully"), "learn:"),
+    h4("The audience of this project will,", em("hopefully"), "learn:"),
     tags$li("gender and salary gaps armong different majors,"),
     tags$li("the cause of gender gaps,"),
     tags$li("gender difference in different majors,"),
@@ -72,7 +71,7 @@ shinyUI(navbarPage(
   tabPanel(
     "Gender Difference in Majors",
     titlePanel("Gender Difference in Majors"),
-    p(
+    h4(
       "The bar graph below uses the data from
             National Center for Education Statistics,
             which demonstrate the percentage difference
@@ -83,14 +82,14 @@ shinyUI(navbarPage(
           The datasets can be chosen with", strong("different checkboxes"),
       "that categorize different majors."
     ),
-    p(
+    h4(
       "The", strong("Show trend"),
       "checkbox is used to show the percentage of male and female
     in the different salary levels,
     which illustrates the general trend between the percentage
     of male/female and the median salary."
     ),
-    p("We have concluded from this chart and analysis that across the country,
+    h4("We have concluded from this chart and analysis that across the country,
           females tend to have less salary than males on average.
           The percentage of female working in the industry
             decreases as the median salary increases.
@@ -127,51 +126,46 @@ shinyUI(navbarPage(
         )
       ),
       mainPanel(
-        plotOutput("diff_plot", height = "600px"),
+        plotlyOutput("diff_plot_top", height = "600px"),
         plotOutput("trend_plot_male", height = "450px"),
         hr(),
-        plotOutput("diff_plot_least", height = "600px"),
+        plotlyOutput("diff_plot_least", height = "600px"),
         plotOutput("trend_plot_female", height = "450px")
       )
     )
   ),
 
   # tab 3
-  tabPanel(
-    "The Main Contributor to Wage Gap",
-    titlePanel("Female Percentage vs. Major Median Salary"),
-    h4(
-        "In this study, we compare how male and female choose
-        their major, and how those major pays in five years.
-        We believe this study can best reflect the real reason behind
-        gender salary gap. The reason is that through comparing
-        major choice and how well ", strong("that major "), "pays,
-        we illiminate individual factors that create wage gap like
-        how one perform in job and how he/she is willing to show up
-        anytime his/her boss calls without prior notice.
-        Thus, we can isolate the one variable we want to study: ",
-        strong("INDIVIDUAL MAJOR CHOICE"), br(), br(),
-        "Furthermore, the salary data we use is the median base
-        salary after working in a position 5 years. ", strong(
-            "It illiminates confunding variables like pregnancy leave
-            and individual performance."
-    )
-        ),
-    sidebarLayout(
-      sidebarPanel(
-        checkboxInput("trend", label = "Show Trend Line", value = F),
-        sliderInput("perc_select",
-          label = "Select Percentage Range",
-          min = 0, max = 1, value = c(0, 1)
+    tabPanel(
+        "The Main Contributor to Wage Gap",
+        titlePanel("Female Percentage vs. Major Median Salary"),
+        h4("In this study, we compare how male and female choose
+                  their major, and how those major pays in five years.
+                  We believe this study can best reflect the real reason behind
+                  gender salary gap. The reason is that through comparing
+                  major choice and how well ", strong("that major "), "pays,
+                  we illiminate individual factors that create wage gap like
+                  how one perform in job and how he/she is willing to show up
+                  anytime his/her boss calls without prior notice.
+                  Thus, we can isolate the one variable we want to study: ",
+           strong("INDIVIDUAL MAJOR CHOICE"), br(), br(),
+           "Furthermore, the salary data we use is the median base
+                  salary after working in a position 5 years. ", strong(
+                      "It illiminates confunding variables like pregnancy leave
+                  and individual performance.")),
+        sidebarLayout(
+            sidebarPanel(
+                checkboxInput("trend", label = "Show Trend Line", value = F),
+                sliderInput("perc_select", label = "Select Percentage Range",
+                            min = 0, max = 1, value = c(0, 1))
+            ),
+            mainPanel(
+                plotlyOutput("female_perc_vs_major_pay"),
+                hr(),
+                plotlyOutput("male_perc_vs_major_pay")
+            )
         )
-      ),
-      mainPanel(
-        plotlyOutput("female_perc_vs_major_pay"),
-        hr(),
-        plotlyOutput("male_perc_vs_major_pay")
-      )
-    )
-  ),
+    ),
 
   # This tab shows the top 10 jobs and the bottom 10 jobs and the
   # gender difference in those jobs

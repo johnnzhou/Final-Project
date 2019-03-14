@@ -1,26 +1,17 @@
 library(shiny)
 library(dplyr)
 library(plotly)
-library(shiny)
 library(ggplot2)
 library(ggrepel)
-
-
 source("analysis.R")
 
 major_data <- read.csv("data/major_enrollment.csv", stringsAsFactors = F)
-major_enrollment1 <- read.csv("data/major_enrollment.csv",
-  stringsAsFactors = FALSE
-)
-
 jobs <- read.csv("data/job_salary_and_gender_percentage.csv",
-  stringsAsFactors = FALSE
-)
-
+                 stringsAsFactors = FALSE)
 
 server <- function(input, output) {
-    
-  diff_data <- reactive({
+
+    diff_data <- reactive({
     difference <- major_enrollment %>%
       arrange(-`Percentage of Male`)
     difference <- left_join(difference, best_25, by = "major")
@@ -217,7 +208,7 @@ server <- function(input, output) {
   perc_range <- reactive({
     range <- input$perc_select
     major_enrollment <- filter(
-      major_enrollment1,
+      major_data,
       perc_to_double(perc_female) > range[1],
       perc_to_double(perc_female) < range[2]
     )
