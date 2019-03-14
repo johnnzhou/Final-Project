@@ -5,8 +5,8 @@ account: colsonxu
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 790732
-bundleId: 1940803
+bundleId: 1940880
 url: https://colsonxu.shinyapps.io/gender-wage-gap/
-when: 1552600980.67633
+when: 1552602753.90057
 asMultiple: FALSE
 asStatic: FALSE

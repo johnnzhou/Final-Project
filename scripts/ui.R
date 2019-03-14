@@ -41,7 +41,7 @@ ui <- navbarPage(
                     .cpright {
                         margin-left: 470px;
                     }
-                    img {
+                    .center {
                         display: block;
                         margin-left: auto;
                         margin-right: auto;
@@ -50,7 +50,7 @@ ui <- navbarPage(
                 ")),
 
         titlePanel("Gender Gap Statistics in the U.S"),
-        img(src =
+        img(class = "center", src =
     "https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png"
         ),
         h6(class = "cpright", "Copyright Recruiting Times"),
