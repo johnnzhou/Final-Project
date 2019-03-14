@@ -1,5 +1,6 @@
 library(tableHTML)
 library(shiny)
+library(plotly)
 source("analysis.R")
 
 shinyUI(navbarPage(
@@ -65,13 +66,13 @@ shinyUI(navbarPage(
     tabPanel(
         "Gender Difference in Majors",
         titlePanel("Gender Difference in Majors"),
-        p("The bar graph below uses the data from National Center for Education Statistics, 
+        h4("The bar graph below uses the data from National Center for Education Statistics, 
           which demonstrate the percentage difference of males and females in different majors. 
           Specifically, the two  bar plots compare the number of male students and female students top-20 male dominant and female dominant majors.  
           The datasets can be chosen with", strong("different checkboxes"),"that categorize different majors."),
-        p("The", strong("Show trend"), "checkbox is used to show the percentage of male and female in the different salary levels, 
+        h4("The", strong("Show trend"), "checkbox is used to show the percentage of male and female in the different salary levels, 
           which illustrates the general trend between the percentage of male/female and the median salary."),
-        p("We have concluded from this chart and analysis that across the country, 
+        h4("We have concluded from this chart and analysis that across the country, 
           females tend to have less salary than males on average. 
           The percentage of female working in the industry decreases as the median salary increases. 
           Even in the Female Dominant Majors, less females work in the industry than males do as the average salary increases. 
@@ -84,26 +85,30 @@ shinyUI(navbarPage(
                 tags$style(make_css(list("#major_list_top", "height", "1000px"))),
                 tags$style(make_css(list("#diff_plot_least", "margin-top", "30px"))),
                 tags$style(make_css(list(".col-sm-8", "width", "70%"))),
+                h2("Graph Controls"),
+                hr(),
                 checkboxInput("male_trend",
                               "Show Trend",
                               value = TRUE),
-                checkboxGroupInput("major_list_top", 
+                checkboxGroupInput("major_list_top",
                                    "Majors",
-                                   selected = major_list_top, 
+                                   selected = major_list_top,
                                    choices = major_list_top),
                 checkboxInput("female_trend",
                               "Show Trend",
                               value = TRUE),
-                checkboxGroupInput("major_list_least", 
+                checkboxGroupInput("major_list_least",
                                    "Majors",
-                                   selected = major_list_least, 
+                                   selected = major_list_least,
                                    choices = major_list_least)
             ),
             mainPanel(
-                plotOutput("diff_plot", height = "600px"),
+                plotlyOutput("diff_plot_top", height = "600px"),
+                hr(),
                 plotOutput("trend_plot_male", height = "450px"),
                 hr(),
-                plotOutput("diff_plot_least", height = "600px"),
+                plotlyOutput("diff_plot_least", height = "600px"),
+                hr(),
                 plotOutput("trend_plot_female", height = "450px")
             )
         )
@@ -113,13 +118,7 @@ shinyUI(navbarPage(
     tabPanel(
         "The Main Contributor to Wage Gap",
         titlePanel("Female Percentage vs. Major Median Salary"),
-        sidebarLayout(
-            sidebarPanel(
-                checkboxInput("trend", label = "Show Trend Line", value = F),
-                sliderInput("perc_select", label = "Select Percentage Range",
-                            min = 0, max = 1, value = c(0, 1)),
-                hr(),
-                h4("In this study, we compare how male and female choose
+        h4("In this study, we compare how male and female choose
                   their major, and how those major pays in five years.
                   We believe this study can best reflect the real reason behind
                   gender salary gap. The reason is that through comparing
@@ -128,11 +127,18 @@ shinyUI(navbarPage(
                   how one perform in job and how he/she is willing to show up
                   anytime his/her boss calls without prior notice.
                   Thus, we can isolate the one variable we want to study: ",
-                   strong("INDIVIDUAL MAJOR CHOICE"), br(), br(),
-                   "Furthermore, the salary data we use is the median base
+           strong("INDIVIDUAL CHOICE OF MAJOR"), br(), br(),
+           "Furthermore, the salary data we use is the median base
                   salary after working in a position 5 years. ", strong(
                       "It illiminates confunding variables like pregnancy leave
-                  and individual performance."))
+                  and individual performance.")),
+        hr(),
+        sidebarLayout(
+            sidebarPanel(
+                h2("Graph Controls"),
+                checkboxInput("trend", label = "Show Trend Line", value = F),
+                sliderInput("perc_select", label = "Select Percentage Range",
+                            min = 0, max = 1, value = c(0, 1))
             ),
             mainPanel(
                 plotlyOutput("female_perc_vs_major_pay"),

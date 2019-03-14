@@ -11,8 +11,8 @@ major_enrollment <-
 major_enrollment$diff <- major_enrollment$male - major_enrollment$female
 major_enrollment <- major_enrollment %>% 
                     mutate(total = male + female,
-                            perc_male = (male / total) * 100,
-                            perc_female = (female / total) * 100) %>% 
+                            perc_male = (male / total),
+                            perc_female = (female / total)) %>% 
                     select(major, perc_male, perc_female, diff)
 
 major_enrollment <- major_enrollment[-4]
@@ -56,6 +56,10 @@ colnames(best_25) <- c("major", "median_pay")
 worst_25 <- read.csv("data/worst_25.csv", stringsAsFactors = FALSE)
 colnames(worst_25) <- c("major", "median_pay")
 
+perc_to_double <- function(x) {
+    as.numeric(gsub("%", "", x)) / 100
+}
 
-
-
+double_to_perc <- function(x) {
+    paste0(round(x, 4) * 100, "%")
+}
