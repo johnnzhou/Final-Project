@@ -14,28 +14,28 @@ shinyUI(navbarPage(
     tabPanel(
     "Overview",
     shinythemes::themeSelector(),
-    #' tags$style(HTML("
-    #'          @import url('https://fonts.googleapis.com/css?family=Oswald:500');
-    #'                     h2 {
-    #'                     font-family: 'Oswald', sans-serif;
-    #'                     font-weight: 500;
-    #'                     line-height: 1.1;
-    #'                     color: #393c42;
-    #'                     }
-    #'                     h3 {
-    #'                     font-family: 'Oswald', sans-serif;
-    #'                     font-weight: 500;
-    #'                     line-height: 1.1;
-    #'                     color: #393c42;
-    #'                     }
-    #'                     h6 {
-    #'                     font-family: 'Oswald', sans-serif;
-    #'                     font-weight: 100;
-    #'                     line-height: 1.1;
-    #'                     color: #545859;
-    #'                     text-align: left;
-    #'                     }
-    #'             ")),
+    tags$style(HTML("
+             @import url('https://fonts.googleapis.com/css?family=Oswald:500');
+                        h2 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 500;
+                        line-height: 1.1;
+                        color: #393c42;
+                        }
+                        h3 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 500;
+                        line-height: 1.1;
+                        color: #393c42;
+                        }
+                        h6 {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 100;
+                        line-height: 1.1;
+                        color: #545859;
+                        text-align: left;
+                        }
+                ")),
     titlePanel("Gender Gap Statistics in the U.S"),
     img(src = 
 "https://recruitingtimes.org/wp-content/uploads/2016/11/Gender-Pay-Gap.png"),
