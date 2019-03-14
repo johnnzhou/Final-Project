@@ -3,17 +3,17 @@
 # install.packages("tableHTML")
 # install.packages("shiny")
 
-library("shinythemes")
+library(shinythemes)
 library(tableHTML)
 library(shiny)
 library(lintr)
 source("analysis.R")
 
-shinyUI(navbarPage(
-  "Gender Gap",
-  tabPanel(
+ui <- navbarPage(
+    theme = shinytheme("yeti"),
+    "Gender Gap",
+    tabPanel(
     "Overview",
-    shinythemes::themeSelector(),
     tags$style(HTML("
              @import url('https://fonts.googleapis.com/css?family=Oswald:500');
                         h2 {
@@ -50,7 +50,7 @@ men and women. Even though today's society is moving towards gender equality,
 people still believe that there is a massive difference in salary among men
 and women. However, in reality there really isn't that big of a gender pay gap
 in our society. This project will support the statement that there isn't
-that big of a salary discrimation between men and women as people belive 
+that big of a salary discrimation between men and women as people belive
       there is."
     ),
 
@@ -63,7 +63,7 @@ Sciences through surveys across United States. One can find more information
       ),
       "which includes education information
     from 2012 to present year.",
-      a("The other dataset coming from Department of Labor", 
+      a("The other dataset coming from Department of Labor",
         href = "https://www.dol.gov/wb/occupations_interactive_txt.htm"),
     "gives us information regarding gender percentage
       and salary in different occupations."
@@ -213,10 +213,10 @@ gap and with this project, we hope to have changed their mind by the end."),
     the pie chart."
     ),
     p("From the bar graph and the pie chart that is shown below. The bar graph
- shows the top 10 and the bottom 10 jobs. The pie chart shows the 
-gender percentage in each of those jobs. We can conclude that the most of the 
+ shows the top 10 and the bottom 10 jobs. The pie chart shows the
+gender percentage in each of those jobs. We can conclude that the most of the
 top 10 jobs have a higher percentage of male then female, while the bottom 10
-jobs shows higher percentage of female then male. This proves that when 
+jobs shows higher percentage of female then male. This proves that when
 calculating the median salary for male and female, it shows that male will
 have a higher salary from this dataset which would be biased and not calculated
 accordingly with other factors."),
@@ -246,4 +246,4 @@ accordingly with other factors."),
       )
     )
   )
-))
+)
